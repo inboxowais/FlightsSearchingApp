@@ -1,0 +1,3563 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>TripSaathi</title>
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/monokai-sublime.min.css" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+    <script>
+        hljs.configure({
+            tabReplace: '    ',
+        });
+        hljs.initHighlightingOnLoad();
+    </script>
+    <style>body {
+    position: relative;
+}
+
+h1 {
+    margin-top: 5px;
+}
+
+h1, h2, h3, h4 {
+    color: #2b2b2b;
+}
+
+h2:after {
+    content: ' ';
+}
+
+h5 {
+    font-weight: bold;
+}
+
+h1 a, h2 a, h3 a, h4 a, h5 a, h6 a {
+    display: none;
+    position: absolute;
+    margin-left: 8px;
+}
+
+h1:hover a, h2:hover a, h3:hover a, h4:hover a, h5:hover a, h6:hover a {
+    color: #a5a5a5;
+    display: initial;
+}
+
+.nav.nav-tabs > li > a {
+    padding-top: 4px;
+    padding-bottom: 4px;
+}
+
+.tab-content {
+    padding-top: 8px;
+}
+
+.table {
+    margin-bottom: 8px;
+}
+
+pre {
+    border-radius: 0px;
+    border: none;
+}
+
+pre code {
+    margin: -9.5px;
+}
+
+.request {
+    margin-top: 12px;
+    margin-bottom: 24px;
+}
+
+.response-text-sample {
+    padding: 0px !important;
+}
+
+.response-text-sample pre {
+    margin-bottom: 0px;
+}
+
+
+#sidebar-wrapper {
+    z-index: 1000;
+    position: fixed;
+    left: 250px;
+    width: 250px;
+    height: 100%;
+    margin-left: -250px;
+    overflow-y: auto;
+    overflow-x: hidden;
+    background: #2b2b2b;
+    padding-top: 20px;
+}
+
+#sidebar-wrapper ul {
+    width: 250px;
+}
+
+#sidebar-wrapper ul li {
+    margin-right: 10px;
+}
+
+#sidebar-wrapper ul li a:hover {
+    background: inherit;
+    text-decoration: none;
+}
+
+#sidebar-wrapper ul li a {
+    display: block;
+    color: #ECF0F1;
+    padding: 6px 15px;
+}
+
+#sidebar-wrapper ul li ul {
+    padding-left: 25px;
+}
+
+#sidebar-wrapper ul li ul li a {
+    padding: 1px 0px;
+}
+
+#sidebar-wrapper ul li a:hover,
+#sidebar-wrapper ul li a:focus {
+    color: #e0c46c;
+    border-right: solid 1px #e0c46c;
+}
+
+#sidebar-wrapper ul li.active > a {
+    color: #e0c46c;
+    border-right: solid 3px #e0c46c;
+}
+
+#sidebar-wrapper ul li:not(.active) ul {
+    display: none;
+}
+
+#page-content-wrapper {
+    width: 100%;
+    position: absolute;
+    padding: 15px 15px 15px 250px;
+}
+</style>
+</head>
+<body data-spy="scroll" data-target=".scrollspy">
+<div id="sidebar-wrapper">
+    <div class="scrollspy">
+    <ul id="main-menu" data-spy="affix" class="nav">
+        <li>
+            <a href="#doc-general-notes">General notes</a>
+        </li>
+        
+        <li>
+            <a href="#request-heartbeat">Heartbeat</a>
+        </li>
+        
+        
+        <li>
+            <a href="#folder-flight-requests">Flight Requests</a>
+            <ul>
+                
+                <li>
+                    <a href="#request-flight-requests-flight-search-airport">Flight - Search Airport</a>
+                </li>
+                
+                <li>
+                    <a href="#request-flight-requests-flight-search-multiple-codes">Flight - Search multiple codes</a>
+                </li>
+                
+                <li>
+                    <a href="#request-flight-requests-flight-get-domestic">Flight - Get - Domestic</a>
+                </li>
+                
+                <li>
+                    <a href="#request-flight-requests-flight-get-international">Flight - Get - International</a>
+                </li>
+                
+                <li>
+                    <a href="#request-flight-requests-flight-airlines">Flight - Airlines</a>
+                </li>
+                
+                <li>
+                    <a href="#request-flight-requests-flight-fare-rules">Flight - Fare rules</a>
+                </li>
+                
+                <li>
+                    <a href="#request-flight-requests-tax-request-testing">Tax Request (Testing)</a>
+                </li>
+                
+                <li>
+                    <a href="#request-flight-requests-taxrequest-raw">Taxrequest Raw</a>
+                </li>
+                
+                <li>
+                    <a href="#request-flight-requests-tax-details">Tax Details</a>
+                </li>
+                
+                <li>
+                    <a href="#request-flight-requests-block-ticket">Block Ticket</a>
+                </li>
+                
+                <li>
+                    <a href="#request-flight-requests-save-flight-selection">Save Flight Selection</a>
+                </li>
+                
+                <li>
+                    <a href="#request-flight-requests-flights-ticket-block-raw">Flights - Ticket Block - Raw</a>
+                </li>
+                
+                <li>
+                    <a href="#request-flight-requests-confirm-ticket">Confirm Ticket</a>
+                </li>
+                
+                <li>
+                    <a href="#request-flight-requests-add-pax">Add Pax</a>
+                </li>
+                
+                <li>
+                    <a href="#request-flight-requests-get-pax">Get Pax</a>
+                </li>
+                
+                <li>
+                    <a href="#request-flight-requests-get-ticket-by-ref-no">Get Ticket by Ref No</a>
+                </li>
+                
+                <li>
+                    <a href="#request-flight-requests-get-booking-status">Get Booking Status</a>
+                </li>
+                
+                <li>
+                    <a href="#request-flight-requests-get-ticket-status">Get Ticket Status</a>
+                </li>
+                
+                <li>
+                    <a href="#request-flight-requests-get-ticket-confirm-response">Get Ticket Confirm Response</a>
+                </li>
+                
+                <li>
+                    <a href="#request-flight-requests-repair-ticket-response">Repair Ticket Response</a>
+                </li>
+                
+            </ul>
+        </li>
+        
+		<li>
+            <a href="#folder-identity">Identity</a>
+            <ul>
+                
+                <li>
+                    <a href="#request-identity-usercontext">userContext</a>
+                </li>
+                
+                <li>
+                    <a href="#request-identity-register">Register</a>
+                </li>
+                
+                <li>
+                    <a href="#request-identity-recharge-wallet">Recharge Wallet</a>
+                </li>
+                
+                <li>
+                    <a href="#request-identity-wallet-transactions">Wallet Transactions</a>
+                </li>
+                
+                <li>
+                    <a href="#request-identity-wallet-balance">Wallet Balance</a>
+                </li>
+                
+                <li>
+                    <a href="#request-identity-delete-user">Delete User</a>
+                </li>
+                
+                <li>
+                    <a href="#request-identity-get-all-users">Get All Users</a>
+                </li>
+                
+                <li>
+                    <a href="#request-identity-get-user">Get User</a>
+                </li>
+                
+                <li>
+                    <a href="#request-identity-get-user-by-uid">Get User by UID</a>
+                </li>
+                
+                <li>
+                    <a href="#request-identity-get-user-exists">Get User Exists</a>
+                </li>
+                
+                <li>
+                    <a href="#request-identity-token">Token</a>
+                </li>
+                
+                <li>
+                    <a href="#request-identity-token-refresh">Token Refresh</a>
+                </li>
+                
+                <li>
+                    <a href="#request-identity-get-otp">Get OTP</a>
+                </li>
+                
+                <li>
+                    <a href="#request-identity-verify-otp">Verify OTP</a>
+                </li>
+                
+                <li>
+                    <a href="#request-identity-login-with-otp">Login with OTP</a>
+                </li>
+                
+                <li>
+                    <a href="#request-identity-change-password">Change Password</a>
+                </li>
+                
+                <li>
+                    <a href="#request-identity-create-login">Create Login</a>
+                </li>
+                
+                <li>
+                    <a href="#request-identity-fb-generate-fb-token">FB - Generate FB Token</a>
+                </li>
+                
+                <li>
+                    <a href="#request-identity-fb-validate-fb-token">FB - Validate FB Token</a>
+                </li>
+                
+                <li>
+                    <a href="#request-identity-fb-get-fb-token-details">FB - Get FB Token Details</a>
+                </li>
+                
+                <li>
+                    <a href="#request-identity-ts-get-fb-token-details">TS - Get FB Token Details</a>
+                </li>
+                
+                <li>
+                    <a href="#request-identity-ts-get-fb-token-validation">TS - Get FB Token Validation</a>
+                </li>
+                
+            </ul>
+        </li>
+        
+        
+		
+		</ul>
+</div>
+
+</div>
+<div id="page-content-wrapper">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-lg-12">
+                <h1>TripSaathi</h1>
+
+                <h2 id="doc-general-notes" style="font-size:16px;line-height:25px">
+                    <a href="#doc-general-notes"><i class="glyphicon glyphicon-link"></i></a>
+					<p><span style="color:#FF0000;"><strong>Additional Headers required</strong></span></p>
+					<p><strong>&quot;apikey&quot; : &quot;&nbsp; ****** API KEY *******&nbsp; &quot;<br />
+					​&quot;Accept-Encoding&quot; : &quot;gzip, deflate&quot;<br />
+					&quot;Contect-Type&quot; : &quot;application/json&quot;</strong></p>
+                </h2>
+
+                <h2 id="doc-api-detail">
+                    API detail
+                    <a href="#doc-api-detail"><i class="glyphicon glyphicon-link"></i></a>
+                </h2>
+
+                
+                
+                <div class="request">
+
+                    <h3 id="request-heartbeat">
+                        Heartbeat
+                        <a href="#request-heartbeat"><i class="glyphicon glyphicon-link"></i></a>
+                    </h3>
+
+                    <div></div>
+
+                    <div>
+                        <ul class="nav nav-tabs" role="tablist">
+                            <li role="presentation" class="active"><a href="#request-heartbeat-example-curl" data-toggle="tab">Curl</a></li>
+                            <li role="presentation"><a href="#request-heartbeat-example-http" data-toggle="tab">HTTP</a></li>
+                        </ul>
+                        <div class="tab-content">
+                            <div class="tab-pane active" id="request-heartbeat-example-curl">
+                                <pre><code class="hljs curl">curl -X GET "https://dev.tripsaathi.com/api/v1/site/ping"</code></pre>
+                            </div>
+                            <div class="tab-pane" id="request-heartbeat-example-http">
+                                <pre><code class="hljs http">GET %7B%7Blive%7D%7D/site/ping HTTP/1.1
+Host: </code></pre>
+                            </div>
+                        </div>
+                    </div>
+
+                    
+
+                    <hr>
+                </div>
+                
+                <div class="endpoints-group">
+                    <h3 id="folder-flight-requests">
+                        Flight Requests
+                        <a href="#folder-flight-requests"><i class="glyphicon glyphicon-link"></i></a>
+                    </h3>
+
+                    <div></div>
+
+                    
+                    
+                    <div class="request">
+
+                        <h4 id="request-flight-requests-flight-search-airport">
+                            Flight - Search Airport
+                            <a href="#request-flight-requests-flight-search-airport"><i class="glyphicon glyphicon-link"></i></a>
+                        </h4>
+
+                        <div></div>
+
+                        <div>
+                            <ul class="nav nav-tabs" role="tablist">
+                                <li role="presentation" class="active"><a href="#request-flight-requests-flight-search-airport-example-curl" data-toggle="tab">Curl</a></li>
+                                <li role="presentation"><a href="#request-flight-requests-flight-search-airport-example-http" data-toggle="tab">HTTP</a></li>
+                            </ul>
+                            <div class="tab-content">
+                                <div class="tab-pane active" id="request-flight-requests-flight-search-airport-example-curl">
+                                    <pre><code class="hljs curl">curl -X GET "https://dev.tripsaathi.com/api/v1/flights/airports/international/bangalore"</code></pre>
+                                </div>
+                                <div class="tab-pane" id="request-flight-requests-flight-search-airport-example-http">
+                                    <pre><code class="hljs http">GET %7B%7Blocalhost%7D%7D/flights/airports/international/bangalore HTTP/1.1
+Host: </code></pre>
+                                </div>
+                            </div>
+                        </div>
+
+                        
+
+                        <hr>
+                    </div>
+                    
+                    
+                    <div class="request">
+
+                        <h4 id="request-flight-requests-flight-search-multiple-codes">
+                            Flight - Search multiple codes
+                            <a href="#request-flight-requests-flight-search-multiple-codes"><i class="glyphicon glyphicon-link"></i></a>
+                        </h4>
+
+                        <div></div>
+
+                        <div>
+                            <ul class="nav nav-tabs" role="tablist">
+                                <li role="presentation" class="active"><a href="#request-flight-requests-flight-search-multiple-codes-example-curl" data-toggle="tab">Curl</a></li>
+                                <li role="presentation"><a href="#request-flight-requests-flight-search-multiple-codes-example-http" data-toggle="tab">HTTP</a></li>
+                            </ul>
+                            <div class="tab-content">
+                                <div class="tab-pane active" id="request-flight-requests-flight-search-multiple-codes-example-curl">
+                                    <pre><code class="hljs curl">curl -X GET "https://dev.tripsaathi.com/api/v1/flights/airports/fetch?codes=BOM,DEL,BKK,BLR,PNQ,HYD,CCU,MAA,GOI,DXB,SIN,KTM,AUH,SHJ,NYC,LON,HKG,SFO,LHR,CDG"</code></pre>
+                                </div>
+                                <div class="tab-pane" id="request-flight-requests-flight-search-multiple-codes-example-http">
+                                    <pre><code class="hljs http">GET %7B%7Blocalhost%7D%7D/flights/airports/fetch?codes=BOM,DEL,BKK,BLR,PNQ,HYD,CCU,MAA,GOI,DXB,SIN,KTM,AUH,SHJ,NYC,LON,HKG,SFO,LHR,CDG HTTP/1.1
+Host: </code></pre>
+                                </div>
+                            </div>
+                        </div>
+
+                        
+
+                        <hr>
+                    </div>
+                    
+                    
+                    <div class="request">
+
+                        <h4 id="request-flight-requests-flight-get-domestic">
+                            Flight - Get - Domestic
+                            <a href="#request-flight-requests-flight-get-domestic"><i class="glyphicon glyphicon-link"></i></a>
+                        </h4>
+
+                        <div></div>
+
+                        <div>
+                            <ul class="nav nav-tabs" role="tablist">
+                                <li role="presentation" class="active"><a href="#request-flight-requests-flight-get-domestic-example-curl" data-toggle="tab">Curl</a></li>
+                                <li role="presentation"><a href="#request-flight-requests-flight-get-domestic-example-http" data-toggle="tab">HTTP</a></li>
+                            </ul>
+                            <div class="tab-content">
+                                <div class="tab-pane active" id="request-flight-requests-flight-get-domestic-example-curl">
+                                    <pre><code class="hljs curl">curl -X POST -H "Content-Type: application/json" -d '{
+  "source": "HYD",
+  "destination": "BLR",
+  "journeyDate": "30-10-2020",
+  "adults": 1,
+  "children": 0,
+  "infants": 0,
+  "userType": 5,
+  "returnDate": "31-10-2020",
+  "tripType" : 2,
+  "flightType": 1,
+  "travelClass" : "E",
+  "pageSize" : 20,
+  "page" : 1
+}' "https://dev.tripsaathi.com/api/v1/flights/search"</code></pre>
+                                </div>
+                                <div class="tab-pane" id="request-flight-requests-flight-get-domestic-example-http">
+                                    <pre><code class="hljs http">POST %7B%7Blocalhost%7D%7D/flights/search HTTP/1.1
+Host: 
+Content-Type: application/json
+
+{
+  "source": "HYD",
+  "destination": "BLR",
+  "journeyDate": "30-10-2020",
+  "adults": 1,
+  "children": 0,
+  "infants": 0,
+  "userType": 5,
+  "returnDate": "31-10-2020",
+  "tripType" : 2,
+  "flightType": 1,
+  "travelClass" : "E",
+  "pageSize" : 20,
+  "page" : 1
+}</code></pre>
+                                </div>
+                            </div>
+                        </div>
+
+                        
+
+                        <hr>
+                    </div>
+                    
+                    
+                    <div class="request">
+
+                        <h4 id="request-flight-requests-flight-get-international">
+                            Flight - Get - International
+                            <a href="#request-flight-requests-flight-get-international"><i class="glyphicon glyphicon-link"></i></a>
+                        </h4>
+
+                        <div></div>
+
+                        <div>
+                            <ul class="nav nav-tabs" role="tablist">
+                                <li role="presentation" class="active"><a href="#request-flight-requests-flight-get-international-example-curl" data-toggle="tab">Curl</a></li>
+                                <li role="presentation"><a href="#request-flight-requests-flight-get-international-example-http" data-toggle="tab">HTTP</a></li>
+                            </ul>
+                            <div class="tab-content">
+                                <div class="tab-pane active" id="request-flight-requests-flight-get-international-example-curl">
+                                    <pre><code class="hljs curl">curl -X POST -H "Content-Type: application/json" -d '{
+  "source": "BOM",
+  "destination": "LGK",
+  "journeyDate": "18-02-2020",
+  "adults": 2,
+  "children": 0,
+  "infants": 0,
+  "userType": 5,
+  "returnDate": "23-02-2020",
+  "tripType" : 2,
+  "flightType": 2,
+  "travelClass" : "E",
+  "useCache" : false
+}' "https://dev.tripsaathi.com/api/v1/flights/search"</code></pre>
+                                </div>
+                                <div class="tab-pane" id="request-flight-requests-flight-get-international-example-http">
+                                    <pre><code class="hljs http">POST %7B%7Blive%7D%7D/flights/search HTTP/1.1
+Host: 
+Content-Type: application/json
+
+{
+  "source": "BOM",
+  "destination": "LGK",
+  "journeyDate": "18-02-2020",
+  "adults": 2,
+  "children": 0,
+  "infants": 0,
+  "userType": 5,
+  "returnDate": "23-02-2020",
+  "tripType" : 2,
+  "flightType": 2,
+  "travelClass" : "E",
+  "useCache" : false
+}</code></pre>
+                                </div>
+                            </div>
+                        </div>
+
+                        
+
+                        <hr>
+                    </div>
+                    
+                    
+                    <div class="request">
+
+                        <h4 id="request-flight-requests-flight-airlines">
+                            Flight - Airlines
+                            <a href="#request-flight-requests-flight-airlines"><i class="glyphicon glyphicon-link"></i></a>
+                        </h4>
+
+                        <div></div>
+
+                        <div>
+                            <ul class="nav nav-tabs" role="tablist">
+                                <li role="presentation" class="active"><a href="#request-flight-requests-flight-airlines-example-curl" data-toggle="tab">Curl</a></li>
+                                <li role="presentation"><a href="#request-flight-requests-flight-airlines-example-http" data-toggle="tab">HTTP</a></li>
+                            </ul>
+                            <div class="tab-content">
+                                <div class="tab-pane active" id="request-flight-requests-flight-airlines-example-curl">
+                                    <pre><code class="hljs curl">curl -X GET -H "Content-Type: application/json" "https://dev.tripsaathi.com/api/v1/flights/airlines"</code></pre>
+                                </div>
+                                <div class="tab-pane" id="request-flight-requests-flight-airlines-example-http">
+                                    <pre><code class="hljs http">GET %7B%7Blocalhost%7D%7D/flights/airlines HTTP/1.1
+Host: 
+Content-Type: application/json</code></pre>
+                                </div>
+                            </div>
+                        </div>
+
+                        
+
+                        <hr>
+                    </div>
+                    
+                    
+                    <div class="request">
+
+                        <h4 id="request-flight-requests-flight-fare-rules">
+                            Flight - Fare rules
+                            <a href="#request-flight-requests-flight-fare-rules"><i class="glyphicon glyphicon-link"></i></a>
+                        </h4>
+
+                        <div></div>
+
+                        <div>
+                            <ul class="nav nav-tabs" role="tablist">
+                                <li role="presentation" class="active"><a href="#request-flight-requests-flight-fare-rules-example-curl" data-toggle="tab">Curl</a></li>
+                                <li role="presentation"><a href="#request-flight-requests-flight-fare-rules-example-http" data-toggle="tab">HTTP</a></li>
+                            </ul>
+                            <div class="tab-content">
+                                <div class="tab-pane active" id="request-flight-requests-flight-fare-rules-example-curl">
+                                    <pre><code class="hljs curl">curl -X GET -H "Content-Type: application/json" "https://dev.tripsaathi.com/api/v1/flights/FareRule"</code></pre>
+                                </div>
+                                <div class="tab-pane" id="request-flight-requests-flight-fare-rules-example-http">
+                                    <pre><code class="hljs http">GET %7B%7Blocalhost%7D%7D/flights/FareRule HTTP/1.1
+Host: 
+Content-Type: application/json</code></pre>
+                                </div>
+                            </div>
+                        </div>
+
+                        
+
+                        <hr>
+                    </div>
+                    
+                    
+                    <div class="request">
+
+                        <h4 id="request-flight-requests-tax-request-testing">
+                            Tax Request (Testing)
+                            <a href="#request-flight-requests-tax-request-testing"><i class="glyphicon glyphicon-link"></i></a>
+                        </h4>
+
+                        <div></div>
+
+                        <div>
+                            <ul class="nav nav-tabs" role="tablist">
+                                <li role="presentation" class="active"><a href="#request-flight-requests-tax-request-testing-example-curl" data-toggle="tab">Curl</a></li>
+                                <li role="presentation"><a href="#request-flight-requests-tax-request-testing-example-http" data-toggle="tab">HTTP</a></li>
+                            </ul>
+                            <div class="tab-content">
+                                <div class="tab-pane active" id="request-flight-requests-tax-request-testing-example-curl">
+                                    <pre><code class="hljs curl">curl -X GET -H "Content-Type: application/json" "https://dev.tripsaathi.com/api/v1/flights/taxrequest"</code></pre>
+                                </div>
+                                <div class="tab-pane" id="request-flight-requests-tax-request-testing-example-http">
+                                    <pre><code class="hljs http">GET %7B%7Blocalhost%7D%7D/flights/taxrequest HTTP/1.1
+Host: 
+Content-Type: application/json</code></pre>
+                                </div>
+                            </div>
+                        </div>
+
+                        
+
+                        <hr>
+                    </div>
+                    
+                    
+                    <div class="request">
+
+                        <h4 id="request-flight-requests-taxrequest-raw">
+                            Taxrequest Raw
+                            <a href="#request-flight-requests-taxrequest-raw"><i class="glyphicon glyphicon-link"></i></a>
+                        </h4>
+
+                        <div></div>
+
+                        <div>
+                            <ul class="nav nav-tabs" role="tablist">
+                                <li role="presentation" class="active"><a href="#request-flight-requests-taxrequest-raw-example-curl" data-toggle="tab">Curl</a></li>
+                                <li role="presentation"><a href="#request-flight-requests-taxrequest-raw-example-http" data-toggle="tab">HTTP</a></li>
+                            </ul>
+                            <div class="tab-content">
+                                <div class="tab-pane active" id="request-flight-requests-taxrequest-raw-example-curl">
+                                    <pre><code class="hljs curl">curl -X POST -H "Content-Type: application/json" -d '{
+  "ActualBaseFare": 5099,
+  "ActualBaseFareRet": 0,
+  "AdultPax": "1",
+  "BookedFrom": "",
+  "BookingDate": "13-11-2017",
+  "ChildPax": "0",
+  "Conveniencefee": 0,
+  "ConveniencefeeRet": 0,
+  "Destination": "BLR",
+  "DestinationName": "Bangalore, BLR",
+  "FlightId": "",
+  "FlightIdRet": "",
+  "FlightType": 1,
+  "GSTDetails": {
+    "GSTCompanyAddress": "Hyderabad",
+    "GSTCompanyContactNumber": "9234234234",
+    "GSTCompanyName": "i2space",
+    "GSTNumber": "534234234233",
+    "GSTCompanyEmail": "guru.m@i2space.com",
+    "GSTFirstName": "Guru",
+    "GSTLastName": "Bharat"
+  },
+  "InfantPax": "0",
+  "IsLCC": true,
+  "IsLCCRet": null,
+  "IsNonStopFlight": false,
+  "JourneyDate": "21-11-2017",
+  "key": "aadd9fd7-7415-458c-97ef-0be6d6907cd3~OB60",
+  "keyRet": "",
+  "OcTax": 0,
+  "OnwardFlightSegments": [
+    {
+      "AirEquipType": "DH8",
+      "ArrivalAirportCode": "BLR",
+      "ArrivalDateTime": "2017-11-21T21:25:00",
+      "ArrivalDateTimeZone": "11/21/2017 9:25:00 PM",
+      "DepartureAirportCode": "HYD",
+      "DepartureDateTime": "2017-11-21T20:05:00",
+      "DepartureDateTimeZone": "11/21/2017 8:05:00 PM",
+      "Duration": "01:20 hrs",
+      "FlightNumber": "1238",
+      "OperatingAirlineCode": "SG",
+      "OperatingAirlineFlightNumber": "1238",
+      "RPH": "",
+      "StopQuantity": "0",
+      "AirLineName": "SpiceJet",
+      "AirportTax": null,
+      "ImageFileName": "SG",
+      "ViaFlight": "",
+      "Discount": "0",
+      "AirportTaxChild": "0",
+      "AirportTaxInfant": "0",
+      "AdultTaxBreakup": "0",
+      "ChildTaxBreakup": "0",
+      "InfantTaxBreakup": "0",
+      "OcTax": "0",
+      "BookingClass": {
+        "Availability": "",
+        "ResBookDesigCode": "",
+        "IntBIC": ""
+      },
+      "BookingClassFare": {
+        "AdultFare": "",
+        "Bookingclass": "",
+        "ClassType": "L",
+        "Farebasiscode": "LSAVER",
+        "Rule": "Refundable",
+        "AdultCommission": null,
+        "ChildCommission": null,
+        "CommissionOnTCharge": null,
+        "ChildFare": null,
+        "InfantFare": null
+      },
+      "IntNumStops": null,
+      "IntOperatingAirlineName": null,
+      "IntArrivalAirportName": "Bangalore",
+      "IntDepartureAirportName": "Hyderabad",
+      "IntMarketingAirlineCode": "1238",
+      "IntLinkSellAgrmnt": null,
+      "IntConx": null,
+      "IntAirpChg": null,
+      "IntInsideAvailOption": null,
+      "IntGenTrafRestriction": null,
+      "IntDaysOperates": null,
+      "IntJourneyTime": null,
+      "IntEndDate": null,
+      "IntStartTerminal": "",
+      "IntEndTerminal": "",
+      "IntFltTm": null,
+      "IntLSAInd": null,
+      "IntMile": "0",
+      "Cabin": null,
+      "itineraryNumber": null,
+      "BaggageAllowed": {
+        "CheckInBaggage": "7 Kg",
+        "HandBaggage": "10 Kg"
+      },
+      "AccumulatedDuration": "0"
+    }
+  ],
+  "ReturnFlightSegments" : null,
+  "provider": "hppl0NiMEqjTM3Tc69prLQ==",
+  "ReturnDate": "22-11-2017",
+  "Rule": " \r\n1. All Guests, including children and infants, must present valid identification at check-in. It is your responsibility to ensure you have the appropriate travel documents at all times.\r\n\r\n2. Check-in starts \"2 hours\" before scheduled departure, and closes 45 minutes prior to the scheduled departure time. Guests are requested to report at least 2 hours prior to departure time, at SpiceJet Check-in counters.\r\n\r\n3. Cancellation / Changes within \"2 hours\" of departure or failure to check-in for a SpiceJet flight at least 45 minutes prior to the scheduled departure time will result in the fare being forfeited. ",
+  "RuleRet": "",
+  "SCharge": 0,
+  "SChargeRet": 0,
+  "Source": "HYD",
+  "SourceName": "Hyderabad, HYD",
+  "Tax": 1134,
+  "TaxRet": 0,
+  "TCharge": 0,
+  "TChargeRet": 0,
+  "TDiscount": 0,
+  "TDiscountRet": 0,
+  "TMarkup": 0,
+  "TMarkupRet": 0,
+  "TPartnerCommission": 0,
+  "TPartnerCommissionRet": 0,
+  "TravelClass": "E",
+  "TripType": 2,
+  "TSdiscount": 0,
+  "TSdiscountRet": 0,
+  "User": "",
+  "UserType": 5
+}' "https://dev.tripsaathi.com/api/v1/flights/tax-old"</code></pre>
+                                </div>
+                                <div class="tab-pane" id="request-flight-requests-taxrequest-raw-example-http">
+                                    <pre><code class="hljs http">POST %7B%7Blocalhost%7D%7D/flights/tax-old HTTP/1.1
+Host: 
+Content-Type: application/json
+
+{
+  "ActualBaseFare": 5099,
+  "ActualBaseFareRet": 0,
+  "AdultPax": "1",
+  "BookedFrom": "",
+  "BookingDate": "13-11-2017",
+  "ChildPax": "0",
+  "Conveniencefee": 0,
+  "ConveniencefeeRet": 0,
+  "Destination": "BLR",
+  "DestinationName": "Bangalore, BLR",
+  "FlightId": "",
+  "FlightIdRet": "",
+  "FlightType": 1,
+  "GSTDetails": {
+    "GSTCompanyAddress": "Hyderabad",
+    "GSTCompanyContactNumber": "9234234234",
+    "GSTCompanyName": "i2space",
+    "GSTNumber": "534234234233",
+    "GSTCompanyEmail": "guru.m@i2space.com",
+    "GSTFirstName": "Guru",
+    "GSTLastName": "Bharat"
+  },
+  "InfantPax": "0",
+  "IsLCC": true,
+  "IsLCCRet": null,
+  "IsNonStopFlight": false,
+  "JourneyDate": "21-11-2017",
+  "key": "aadd9fd7-7415-458c-97ef-0be6d6907cd3~OB60",
+  "keyRet": "",
+  "OcTax": 0,
+  "OnwardFlightSegments": [
+    {
+      "AirEquipType": "DH8",
+      "ArrivalAirportCode": "BLR",
+      "ArrivalDateTime": "2017-11-21T21:25:00",
+      "ArrivalDateTimeZone": "11/21/2017 9:25:00 PM",
+      "DepartureAirportCode": "HYD",
+      "DepartureDateTime": "2017-11-21T20:05:00",
+      "DepartureDateTimeZone": "11/21/2017 8:05:00 PM",
+      "Duration": "01:20 hrs",
+      "FlightNumber": "1238",
+      "OperatingAirlineCode": "SG",
+      "OperatingAirlineFlightNumber": "1238",
+      "RPH": "",
+      "StopQuantity": "0",
+      "AirLineName": "SpiceJet",
+      "AirportTax": null,
+      "ImageFileName": "SG",
+      "ViaFlight": "",
+      "Discount": "0",
+      "AirportTaxChild": "0",
+      "AirportTaxInfant": "0",
+      "AdultTaxBreakup": "0",
+      "ChildTaxBreakup": "0",
+      "InfantTaxBreakup": "0",
+      "OcTax": "0",
+      "BookingClass": {
+        "Availability": "",
+        "ResBookDesigCode": "",
+        "IntBIC": ""
+      },
+      "BookingClassFare": {
+        "AdultFare": "",
+        "Bookingclass": "",
+        "ClassType": "L",
+        "Farebasiscode": "LSAVER",
+        "Rule": "Refundable",
+        "AdultCommission": null,
+        "ChildCommission": null,
+        "CommissionOnTCharge": null,
+        "ChildFare": null,
+        "InfantFare": null
+      },
+      "IntNumStops": null,
+      "IntOperatingAirlineName": null,
+      "IntArrivalAirportName": "Bangalore",
+      "IntDepartureAirportName": "Hyderabad",
+      "IntMarketingAirlineCode": "1238",
+      "IntLinkSellAgrmnt": null,
+      "IntConx": null,
+      "IntAirpChg": null,
+      "IntInsideAvailOption": null,
+      "IntGenTrafRestriction": null,
+      "IntDaysOperates": null,
+      "IntJourneyTime": null,
+      "IntEndDate": null,
+      "IntStartTerminal": "",
+      "IntEndTerminal": "",
+      "IntFltTm": null,
+      "IntLSAInd": null,
+      "IntMile": "0",
+      "Cabin": null,
+      "itineraryNumber": null,
+      "BaggageAllowed": {
+        "CheckInBaggage": "7 Kg",
+        "HandBaggage": "10 Kg"
+      },
+      "AccumulatedDuration": "0"
+    }
+  ],
+  "ReturnFlightSegments" : null,
+  "provider": "hppl0NiMEqjTM3Tc69prLQ==",
+  "ReturnDate": "22-11-2017",
+  "Rule": " \r\n1. All Guests, including children and infants, must present valid identification at check-in. It is your responsibility to ensure you have the appropriate travel documents at all times.\r\n\r\n2. Check-in starts \"2 hours\" before scheduled departure, and closes 45 minutes prior to the scheduled departure time. Guests are requested to report at least 2 hours prior to departure time, at SpiceJet Check-in counters.\r\n\r\n3. Cancellation / Changes within \"2 hours\" of departure or failure to check-in for a SpiceJet flight at least 45 minutes prior to the scheduled departure time will result in the fare being forfeited. ",
+  "RuleRet": "",
+  "SCharge": 0,
+  "SChargeRet": 0,
+  "Source": "HYD",
+  "SourceName": "Hyderabad, HYD",
+  "Tax": 1134,
+  "TaxRet": 0,
+  "TCharge": 0,
+  "TChargeRet": 0,
+  "TDiscount": 0,
+  "TDiscountRet": 0,
+  "TMarkup": 0,
+  "TMarkupRet": 0,
+  "TPartnerCommission": 0,
+  "TPartnerCommissionRet": 0,
+  "TravelClass": "E",
+  "TripType": 2,
+  "TSdiscount": 0,
+  "TSdiscountRet": 0,
+  "User": "",
+  "UserType": 5
+}</code></pre>
+                                </div>
+                            </div>
+                        </div>
+
+                        
+
+                        <hr>
+                    </div>
+                    
+                    
+                    <div class="request">
+
+                        <h4 id="request-flight-requests-tax-details">
+                            Tax Details
+                            <a href="#request-flight-requests-tax-details"><i class="glyphicon glyphicon-link"></i></a>
+                        </h4>
+
+                        <div></div>
+
+                        <div>
+                            <ul class="nav nav-tabs" role="tablist">
+                                <li role="presentation" class="active"><a href="#request-flight-requests-tax-details-example-curl" data-toggle="tab">Curl</a></li>
+                                <li role="presentation"><a href="#request-flight-requests-tax-details-example-http" data-toggle="tab">HTTP</a></li>
+                            </ul>
+                            <div class="tab-content">
+                                <div class="tab-pane active" id="request-flight-requests-tax-details-example-curl">
+                                    <pre><code class="hljs curl">curl -X POST -H "Content-Type: application/json" -d '{
+  "SearchId" : "HYD-BLR-20200101-20200103",
+  "FlightId" : "68db85ff-33c6-49d1-a0ef-da93ac46e874",
+  "ReturnFlightId" : "97945d99-8898-4893-afe0-d8c6797a891a",
+  "TripType" : 2,
+  "FlightType" : 1,
+  "GstDetails" : {
+  	"GSTCompanyAddress": "Hyderabad",
+    "GSTCompanyContactNumber": "9234234234",
+    "GSTCompanyName": "i2space",
+    "GSTNumber": "534234234233",
+    "GSTCompanyEmail": "guru.m@i2space.com",
+    "GSTFirstName": "Guru",
+    "GSTLastName": "Bharat"
+  }
+}' "https://dev.tripsaathi.com/api/v1/flights/tax"</code></pre>
+                                </div>
+                                <div class="tab-pane" id="request-flight-requests-tax-details-example-http">
+                                    <pre><code class="hljs http">POST %7B%7Blocalhost%7D%7D/flights/tax HTTP/1.1
+Host: 
+Content-Type: application/json
+
+{
+  "SearchId" : "HYD-BLR-20200101-20200103",
+  "FlightId" : "68db85ff-33c6-49d1-a0ef-da93ac46e874",
+  "ReturnFlightId" : "97945d99-8898-4893-afe0-d8c6797a891a",
+  "TripType" : 2,
+  "FlightType" : 1,
+  "GstDetails" : {
+  	"GSTCompanyAddress": "Hyderabad",
+    "GSTCompanyContactNumber": "9234234234",
+    "GSTCompanyName": "i2space",
+    "GSTNumber": "534234234233",
+    "GSTCompanyEmail": "guru.m@i2space.com",
+    "GSTFirstName": "Guru",
+    "GSTLastName": "Bharat"
+  }
+}</code></pre>
+                                </div>
+                            </div>
+                        </div>
+
+                        
+
+                        <hr>
+                    </div>
+                    
+                    
+                    <div class="request">
+
+                        <h4 id="request-flight-requests-block-ticket">
+                            Block Ticket
+                            <a href="#request-flight-requests-block-ticket"><i class="glyphicon glyphicon-link"></i></a>
+                        </h4>
+
+                        <div></div>
+
+                        <div>
+                            <ul class="nav nav-tabs" role="tablist">
+                                <li role="presentation" class="active"><a href="#request-flight-requests-block-ticket-example-curl" data-toggle="tab">Curl</a></li>
+                                <li role="presentation"><a href="#request-flight-requests-block-ticket-example-http" data-toggle="tab">HTTP</a></li>
+                            </ul>
+                            <div class="tab-content">
+                                <div class="tab-pane active" id="request-flight-requests-block-ticket-example-curl">
+                                    <pre><code class="hljs curl">curl -X POST -H "Content-Type: application/json" -d '{
+  "SearchId" : "a8337e8a-a833-4966-9409-aba6d2f9d5ab",
+  "FlightId" : "b64c2745-3f7f-4958-976b-44b9eccfc65d",
+  "ReturnFlightId" : "241bf91f-24af-4641-b4d3-fcb48473ad09",
+  "TripType" : 2,
+  "FlightType" : 1,
+  "GstDetails" : {
+  	"GSTCompanyAddress": "Hyderabad",
+    "GSTCompanyContactNumber": "9234234234",
+    "GSTCompanyName": "i2space",
+    "GSTNumber": "534234234233",
+    "GSTCompanyEmail": "guru.m@i2space.com",
+    "GSTFirstName": "Guru",
+    "GSTLastName": "Bharat"
+  },
+  "City" : "Hyderabad",
+  "UserID" : "6D2DF81E-759E-4C97-8EB9-67E4D1B27A96",
+  "Email" : "sonuame@aol.com",
+  "MobileNo" : "8861056670",
+  "Names" : [
+  		{ "Salut" : "Mr", "FirstName" : "Sunil", "LastName" : "Kumar", "Type" : "ADT", "dob":"03-02-1988", "gender" : "M" },
+  		{ "Salut" : "Mr", "FirstName" : "Vicky", "LastName" : "Kumar", "Type" : "ADT", "dob":"03-02-1988", "gender" : "M" },
+  		{ "Salut" : "Mrs", "FirstName" : "Rashmi", "LastName" : "Singh", "Type" : "ADT", "dob":"03-02-1988", "gender" : "F" },
+  		{ "Salut" : "Mrs", "FirstName" : "Rajni", "LastName" : "singh", "Type" : "ADT", "dob":"03-02-1988", "gender" : "F" }
+  	],
+  	"PassportDetails" : null,
+  	"Psgrtype" : ""
+}' "https://dev.tripsaathi.com/api/v1/flights/ticket/block"</code></pre>
+                                </div>
+                                <div class="tab-pane" id="request-flight-requests-block-ticket-example-http">
+                                    <pre><code class="hljs http">POST %7B%7Blocalhost%7D%7D/flights/ticket/block HTTP/1.1
+Host: 
+Content-Type: application/json
+
+{
+  "SearchId" : "a8337e8a-a833-4966-9409-aba6d2f9d5ab",
+  "FlightId" : "b64c2745-3f7f-4958-976b-44b9eccfc65d",
+  "ReturnFlightId" : "241bf91f-24af-4641-b4d3-fcb48473ad09",
+  "TripType" : 2,
+  "FlightType" : 1,
+  "GstDetails" : {
+  	"GSTCompanyAddress": "Hyderabad",
+    "GSTCompanyContactNumber": "9234234234",
+    "GSTCompanyName": "i2space",
+    "GSTNumber": "534234234233",
+    "GSTCompanyEmail": "guru.m@i2space.com",
+    "GSTFirstName": "Guru",
+    "GSTLastName": "Bharat"
+  },
+  "City" : "Hyderabad",
+  "UserID" : "6D2DF81E-759E-4C97-8EB9-67E4D1B27A96",
+  "Email" : "sonuame@aol.com",
+  "MobileNo" : "8861056670",
+  "Names" : [
+  		{ "Salut" : "Mr", "FirstName" : "Sunil", "LastName" : "Kumar", "Type" : "ADT", "dob":"03-02-1988", "gender" : "M" },
+  		{ "Salut" : "Mr", "FirstName" : "Vicky", "LastName" : "Kumar", "Type" : "ADT", "dob":"03-02-1988", "gender" : "M" },
+  		{ "Salut" : "Mrs", "FirstName" : "Rashmi", "LastName" : "Singh", "Type" : "ADT", "dob":"03-02-1988", "gender" : "F" },
+  		{ "Salut" : "Mrs", "FirstName" : "Rajni", "LastName" : "singh", "Type" : "ADT", "dob":"03-02-1988", "gender" : "F" }
+  	],
+  	"PassportDetails" : null,
+  	"Psgrtype" : ""
+}</code></pre>
+                                </div>
+                            </div>
+                        </div>
+
+                        
+
+                        <hr>
+                    </div>
+                    
+                    
+                    <div class="request">
+
+                        <h4 id="request-flight-requests-save-flight-selection">
+                            Save Flight Selection
+                            <a href="#request-flight-requests-save-flight-selection"><i class="glyphicon glyphicon-link"></i></a>
+                        </h4>
+
+                        <div></div>
+
+                        <div>
+                            <ul class="nav nav-tabs" role="tablist">
+                                <li role="presentation" class="active"><a href="#request-flight-requests-save-flight-selection-example-curl" data-toggle="tab">Curl</a></li>
+                                <li role="presentation"><a href="#request-flight-requests-save-flight-selection-example-http" data-toggle="tab">HTTP</a></li>
+                            </ul>
+                            <div class="tab-content">
+                                <div class="tab-pane active" id="request-flight-requests-save-flight-selection-example-curl">
+                                    <pre><code class="hljs curl">curl -X POST -H "Content-Type: application/json" -d '{
+  "flightRequest" : {
+  	"adults": "1",
+	"children": "1",
+	"destination": "BLR",
+	"flightType": 1,
+	"infants": "1",
+	"journeyDate": "01-01-2020",
+	"returnDate": "03-01-2020",
+	"source": "HYD",
+	"travelClass": "E",
+	"tripType": 2,
+	"userType": 5
+  },
+  "flightType": 1,
+  "tripType": 2,
+  "searchID": "HYD-BLR-20200101-20200103",
+  "selection": {
+    "DomesticOnward": {
+      "FareDetails": {
+        "ChargeableFares": {
+          "ActualBaseFare": 4194,
+          "Tax": 2262,
+          "STax": 0,
+          "SCharge": 0,
+          "TDiscount": 0,
+          "TPartnerCommission": 0,
+          "NetFare": 4194,
+          "Conveniencefee": 0,
+          "ConveniencefeeType": 1,
+          "PartnerFareDatails": {
+            "NetFares": 4194,
+            "Commission": 0,
+            "CommissionType": 0
+          }
+        },
+        "NonchargeableFares": {
+          "TCharge": 0,
+          "TMarkup": 0,
+          "TSdiscount": 0
+        },
+        "FareBreakUp": {
+          "FareAry": [
+            {
+              "IntPassengerType": 1,
+              "IntBaseFare": 1472,
+              "IntTax": 931,
+              "IntYqTax": 200,
+              "IntTaxDataArray": [
+                {
+                  "IntCountry": "India",
+                  "IntAmount": 2603
+                }
+              ]
+            },
+            {
+              "IntPassengerType": 2,
+              "IntBaseFare": 1472,
+              "IntTax": 931,
+              "IntYqTax": 200,
+              "IntTaxDataArray": [
+                {
+                  "IntCountry": "India",
+                  "IntAmount": 2603
+                }
+              ]
+            },
+            {
+              "IntPassengerType": 3,
+              "IntBaseFare": 1250,
+              "IntTax": 0,
+              "IntYqTax": 0,
+              "IntTaxDataArray": [
+                {
+                  "IntCountry": "India",
+                  "IntAmount": 1250
+                }
+              ]
+            }
+          ]
+        },
+        "OcTax": 0,
+        "Bonus": 0,
+        "TotalFare": 6456,
+        "ResponseStatus": 0,
+        "Status": 14,
+        "Message": null
+      },
+      "FlightSegments": [
+        {
+          "AirEquipType": "320",
+          "ArrivalAirportCode": "BLR",
+          "ArrivalDateTime": "2020-01-01T09:50:00",
+          "ArrivalDateTimeZone": "01/01/2020 9:50:00 AM",
+          "DepartureAirportCode": "HYD",
+          "DepartureDateTime": "2020-01-01T08:25:00",
+          "DepartureDateTimeZone": "01/01/2020 8:25:00 AM",
+          "Duration": "01:25 hrs",
+          "DurationMinutes": 85,
+          "FlightNumber": "151",
+          "OperatingAirlineCode": "6E",
+          "OperatingAirlineFlightNumber": "151",
+          "Rph": "",
+          "StopQuantity": 0,
+          "AirLineName": "Indigo",
+          "AirportTax": null,
+          "ImageFileName": "6E",
+          "AirlineLogo": "https://webapi.etravos.com/Images/airline_logos/6E.png",
+          "ViaFlight": "",
+          "Discount": 0,
+          "AirportTaxChild": 0,
+          "AirportTaxInfant": 0,
+          "AdultTaxBreakup": 0,
+          "ChildTaxBreakup": 0,
+          "InfantTaxBreakup": 0,
+          "OcTax": 0,
+          "BookingClass": {
+            "Availability": "9",
+            "ResBookDesigCode": "L",
+            "IntBic": ""
+          },
+          "BookingClassFare": {
+            "AdultFare": "",
+            "Bookingclass": "",
+            "ClassType": "L",
+            "Farebasiscode": "L0IP",
+            "Rule": "Refundable",
+            "AdultCommission": null,
+            "ChildCommission": null,
+            "CommissionOnTCharge": null,
+            "ChildFare": null,
+            "InfantFare": null
+          },
+          "IntNumStops": null,
+          "IntOperatingAirlineName": null,
+          "IntArrivalAirportName": "Bangalore",
+          "IntDepartureAirportName": "Hyderabad",
+          "IntMarketingAirlineCode": "151",
+          "IntLinkSellAgrmnt": null,
+          "IntConx": null,
+          "IntAirpChg": null,
+          "IntInsideAvailOption": null,
+          "IntGenTrafRestriction": null,
+          "IntDaysOperates": null,
+          "IntJourneyTime": null,
+          "IntEndDate": null,
+          "IntStartTerminal": "",
+          "IntEndTerminal": "1",
+          "IntFltTm": null,
+          "IntLsaInd": null,
+          "IntMile": 0,
+          "Cabin": null,
+          "ItineraryNumber": "637084879167989146-217-1480_ET0",
+          "BaggageAllowed": {
+            "CheckInBaggage": "15 KG",
+            "HandBaggage": "7 KG"
+          },
+          "AccumulatedDuration": "0",
+          "GroundTime": "00:00 hrs"
+        }
+      ],
+      "OriginDestinationoptionId": {
+        "Id": "",
+        "Key": "49708da0-d821-46e0-a7f4-ccea4ee3831d~OB1~636892211974468103182"
+      },
+      "RequestDetails": {
+        "Mode": "DOMESTIC",
+        "Source": "HYD",
+        "Destination": "BLR",
+        "Adults": 1,
+        "Children": 1,
+        "Infants": 1,
+        "DepartDate": "2020-01-01T00:00:00",
+        "ReturnDate": "2020-01-03T00:00:00",
+        "MultiCityearch": null
+      },
+      "Provider": "OpvFxVwo03md+gnyIb8Q+A==",
+      "IntOnward": null,
+      "IntReturn": null,
+      "IntMulti": null,
+      "AffiliateId": null,
+      "PartnerID": null,
+      "IsLCC": true,
+      "IsGSTMandatory": false,
+      "IsHoldAllowed": false,
+      "ID": "560bbc98-3932-49f5-8b2a-124c0941d41f",
+      "Airports": [
+        {
+          "AirportCode": "BLR",
+          "City": "BANGALORE",
+          "Country": "India",
+          "AirportDesc": "Bangalore International Airport",
+          "Type": "C",
+          "Sort": 1
+        },
+        {
+          "AirportCode": "HYD",
+          "City": "HYDERABAD",
+          "Country": "India",
+          "AirportDesc": "Rajiv Gandhi Airport",
+          "Type": "C",
+          "Sort": 2
+        }
+      ],
+      "FlightUId": "ET-0",
+      "AirlineRemark": "",
+      "Selected": true,
+      "Index": 0
+    },
+    "DomesticReturn": {
+      "FareDetails": {
+        "ChargeableFares": {
+          "ActualBaseFare": 4952,
+          "Tax": 1346,
+          "STax": 0,
+          "SCharge": 0,
+          "TDiscount": 0,
+          "TPartnerCommission": 0,
+          "NetFare": 4952,
+          "Conveniencefee": 0,
+          "ConveniencefeeType": 1,
+          "PartnerFareDatails": {
+            "NetFares": 4952,
+            "Commission": 0,
+            "CommissionType": 0
+          }
+        },
+        "NonchargeableFares": {
+          "TCharge": 0,
+          "TMarkup": 0,
+          "TSdiscount": 0
+        },
+        "FareBreakUp": {
+          "FareAry": [
+            {
+              "IntPassengerType": 1,
+              "IntBaseFare": 1851,
+              "IntTax": 473,
+              "IntYqTax": 200,
+              "IntTaxDataArray": [
+                {
+                  "IntCountry": "India",
+                  "IntAmount": 2524
+                }
+              ]
+            },
+            {
+              "IntPassengerType": 2,
+              "IntBaseFare": 1851,
+              "IntTax": 473,
+              "IntYqTax": 200,
+              "IntTaxDataArray": [
+                {
+                  "IntCountry": "India",
+                  "IntAmount": 2524
+                }
+              ]
+            },
+            {
+              "IntPassengerType": 3,
+              "IntBaseFare": 1250,
+              "IntTax": 0,
+              "IntYqTax": 0,
+              "IntTaxDataArray": [
+                {
+                  "IntCountry": "India",
+                  "IntAmount": 1250
+                }
+              ]
+            }
+          ]
+        },
+        "OcTax": 0,
+        "Bonus": 0,
+        "TotalFare": 6298,
+        "ResponseStatus": 0,
+        "Status": 14,
+        "Message": null
+      },
+      "FlightSegments": [
+        {
+          "AirEquipType": "320",
+          "ArrivalAirportCode": "HYD",
+          "ArrivalDateTime": "2020-01-04T00:25:00",
+          "ArrivalDateTimeZone": "01/04/2020 12:25:00 AM",
+          "DepartureAirportCode": "BLR",
+          "DepartureDateTime": "2020-01-03T23:00:00",
+          "DepartureDateTimeZone": "01/03/2020 11:00:00 PM",
+          "Duration": "01:25 hrs",
+          "DurationMinutes": 85,
+          "FlightNumber": "824",
+          "OperatingAirlineCode": "6E",
+          "OperatingAirlineFlightNumber": "824",
+          "Rph": "",
+          "StopQuantity": 0,
+          "AirLineName": "Indigo",
+          "AirportTax": null,
+          "ImageFileName": "6E",
+          "AirlineLogo": "https://webapi.etravos.com/Images/airline_logos/6E.png",
+          "ViaFlight": "",
+          "Discount": 0,
+          "AirportTaxChild": 0,
+          "AirportTaxInfant": 0,
+          "AdultTaxBreakup": 0,
+          "ChildTaxBreakup": 0,
+          "InfantTaxBreakup": 0,
+          "OcTax": 0,
+          "BookingClass": {
+            "Availability": "9",
+            "ResBookDesigCode": "L",
+            "IntBic": ""
+          },
+          "BookingClassFare": {
+            "AdultFare": "",
+            "Bookingclass": "",
+            "ClassType": "L",
+            "Farebasiscode": "L0IP",
+            "Rule": "Refundable",
+            "AdultCommission": null,
+            "ChildCommission": null,
+            "CommissionOnTCharge": null,
+            "ChildFare": null,
+            "InfantFare": null
+          },
+          "IntNumStops": null,
+          "IntOperatingAirlineName": null,
+          "IntArrivalAirportName": "Hyderabad",
+          "IntDepartureAirportName": "Bangalore",
+          "IntMarketingAirlineCode": "824",
+          "IntLinkSellAgrmnt": null,
+          "IntConx": null,
+          "IntAirpChg": null,
+          "IntInsideAvailOption": null,
+          "IntGenTrafRestriction": null,
+          "IntDaysOperates": null,
+          "IntJourneyTime": null,
+          "IntEndDate": null,
+          "IntStartTerminal": "1",
+          "IntEndTerminal": "",
+          "IntFltTm": null,
+          "IntLsaInd": null,
+          "IntMile": 0,
+          "Cabin": null,
+          "ItineraryNumber": "637084879167989146-217-1480_ETR1",
+          "BaggageAllowed": {
+            "CheckInBaggage": "15 KG",
+            "HandBaggage": "7 KG"
+          },
+          "AccumulatedDuration": "0",
+          "GroundTime": "00:00 hrs"
+        }
+      ],
+      "OriginDestinationoptionId": {
+        "Id": "",
+        "Key": "49708da0-d821-46e0-a7f4-ccea4ee3831d~IB11~636892211974468103182"
+      },
+      "RequestDetails": {
+        "Mode": "DOMESTIC",
+        "Source": "HYD",
+        "Destination": "BLR",
+        "Adults": 1,
+        "Children": 1,
+        "Infants": 1,
+        "DepartDate": "2020-01-01T00:00:00",
+        "ReturnDate": "2020-01-03T00:00:00",
+        "MultiCityearch": null
+      },
+      "Provider": "OpvFxVwo03md+gnyIb8Q+A==",
+      "IntOnward": null,
+      "IntReturn": null,
+      "IntMulti": null,
+      "AffiliateId": null,
+      "PartnerID": null,
+      "IsLCC": true,
+      "IsGSTMandatory": false,
+      "IsHoldAllowed": false,
+      "ID": "2bf1cad9-cdd0-4f1a-bb8b-4ec3ccc30ca8",
+      "Airports": [
+        {
+          "AirportCode": "HYD",
+          "City": "HYDERABAD",
+          "Country": "India",
+          "AirportDesc": "Rajiv Gandhi Airport",
+          "Type": "C",
+          "Sort": 2
+        },
+        {
+          "AirportCode": "BLR",
+          "City": "BANGALORE",
+          "Country": "India",
+          "AirportDesc": "Bangalore International Airport",
+          "Type": "C",
+          "Sort": 1
+        }
+      ],
+      "FlightUId": "ETR-1",
+      "AirlineRemark": "",
+      "Index": 1,
+      "Selected": true
+    }
+  },
+  "key": ""
+}' "https://dev.tripsaathi.com/api/v1/flights/select"</code></pre>
+                                </div>
+                                <div class="tab-pane" id="request-flight-requests-save-flight-selection-example-http">
+                                    <pre><code class="hljs http">POST %7B%7Blocalhost%7D%7D/flights/select HTTP/1.1
+Host: 
+Content-Type: application/json
+
+{
+  "flightRequest" : {
+  	"adults": "1",
+	"children": "1",
+	"destination": "BLR",
+	"flightType": 1,
+	"infants": "1",
+	"journeyDate": "01-01-2020",
+	"returnDate": "03-01-2020",
+	"source": "HYD",
+	"travelClass": "E",
+	"tripType": 2,
+	"userType": 5
+  },
+  "flightType": 1,
+  "tripType": 2,
+  "searchID": "HYD-BLR-20200101-20200103",
+  "selection": {
+    "DomesticOnward": {
+      "FareDetails": {
+        "ChargeableFares": {
+          "ActualBaseFare": 4194,
+          "Tax": 2262,
+          "STax": 0,
+          "SCharge": 0,
+          "TDiscount": 0,
+          "TPartnerCommission": 0,
+          "NetFare": 4194,
+          "Conveniencefee": 0,
+          "ConveniencefeeType": 1,
+          "PartnerFareDatails": {
+            "NetFares": 4194,
+            "Commission": 0,
+            "CommissionType": 0
+          }
+        },
+        "NonchargeableFares": {
+          "TCharge": 0,
+          "TMarkup": 0,
+          "TSdiscount": 0
+        },
+        "FareBreakUp": {
+          "FareAry": [
+            {
+              "IntPassengerType": 1,
+              "IntBaseFare": 1472,
+              "IntTax": 931,
+              "IntYqTax": 200,
+              "IntTaxDataArray": [
+                {
+                  "IntCountry": "India",
+                  "IntAmount": 2603
+                }
+              ]
+            },
+            {
+              "IntPassengerType": 2,
+              "IntBaseFare": 1472,
+              "IntTax": 931,
+              "IntYqTax": 200,
+              "IntTaxDataArray": [
+                {
+                  "IntCountry": "India",
+                  "IntAmount": 2603
+                }
+              ]
+            },
+            {
+              "IntPassengerType": 3,
+              "IntBaseFare": 1250,
+              "IntTax": 0,
+              "IntYqTax": 0,
+              "IntTaxDataArray": [
+                {
+                  "IntCountry": "India",
+                  "IntAmount": 1250
+                }
+              ]
+            }
+          ]
+        },
+        "OcTax": 0,
+        "Bonus": 0,
+        "TotalFare": 6456,
+        "ResponseStatus": 0,
+        "Status": 14,
+        "Message": null
+      },
+      "FlightSegments": [
+        {
+          "AirEquipType": "320",
+          "ArrivalAirportCode": "BLR",
+          "ArrivalDateTime": "2020-01-01T09:50:00",
+          "ArrivalDateTimeZone": "01/01/2020 9:50:00 AM",
+          "DepartureAirportCode": "HYD",
+          "DepartureDateTime": "2020-01-01T08:25:00",
+          "DepartureDateTimeZone": "01/01/2020 8:25:00 AM",
+          "Duration": "01:25 hrs",
+          "DurationMinutes": 85,
+          "FlightNumber": "151",
+          "OperatingAirlineCode": "6E",
+          "OperatingAirlineFlightNumber": "151",
+          "Rph": "",
+          "StopQuantity": 0,
+          "AirLineName": "Indigo",
+          "AirportTax": null,
+          "ImageFileName": "6E",
+          "AirlineLogo": "https://webapi.etravos.com/Images/airline_logos/6E.png",
+          "ViaFlight": "",
+          "Discount": 0,
+          "AirportTaxChild": 0,
+          "AirportTaxInfant": 0,
+          "AdultTaxBreakup": 0,
+          "ChildTaxBreakup": 0,
+          "InfantTaxBreakup": 0,
+          "OcTax": 0,
+          "BookingClass": {
+            "Availability": "9",
+            "ResBookDesigCode": "L",
+            "IntBic": ""
+          },
+          "BookingClassFare": {
+            "AdultFare": "",
+            "Bookingclass": "",
+            "ClassType": "L",
+            "Farebasiscode": "L0IP",
+            "Rule": "Refundable",
+            "AdultCommission": null,
+            "ChildCommission": null,
+            "CommissionOnTCharge": null,
+            "ChildFare": null,
+            "InfantFare": null
+          },
+          "IntNumStops": null,
+          "IntOperatingAirlineName": null,
+          "IntArrivalAirportName": "Bangalore",
+          "IntDepartureAirportName": "Hyderabad",
+          "IntMarketingAirlineCode": "151",
+          "IntLinkSellAgrmnt": null,
+          "IntConx": null,
+          "IntAirpChg": null,
+          "IntInsideAvailOption": null,
+          "IntGenTrafRestriction": null,
+          "IntDaysOperates": null,
+          "IntJourneyTime": null,
+          "IntEndDate": null,
+          "IntStartTerminal": "",
+          "IntEndTerminal": "1",
+          "IntFltTm": null,
+          "IntLsaInd": null,
+          "IntMile": 0,
+          "Cabin": null,
+          "ItineraryNumber": "637084879167989146-217-1480_ET0",
+          "BaggageAllowed": {
+            "CheckInBaggage": "15 KG",
+            "HandBaggage": "7 KG"
+          },
+          "AccumulatedDuration": "0",
+          "GroundTime": "00:00 hrs"
+        }
+      ],
+      "OriginDestinationoptionId": {
+        "Id": "",
+        "Key": "49708da0-d821-46e0-a7f4-ccea4ee3831d~OB1~636892211974468103182"
+      },
+      "RequestDetails": {
+        "Mode": "DOMESTIC",
+        "Source": "HYD",
+        "Destination": "BLR",
+        "Adults": 1,
+        "Children": 1,
+        "Infants": 1,
+        "DepartDate": "2020-01-01T00:00:00",
+        "ReturnDate": "2020-01-03T00:00:00",
+        "MultiCityearch": null
+      },
+      "Provider": "OpvFxVwo03md+gnyIb8Q+A==",
+      "IntOnward": null,
+      "IntReturn": null,
+      "IntMulti": null,
+      "AffiliateId": null,
+      "PartnerID": null,
+      "IsLCC": true,
+      "IsGSTMandatory": false,
+      "IsHoldAllowed": false,
+      "ID": "560bbc98-3932-49f5-8b2a-124c0941d41f",
+      "Airports": [
+        {
+          "AirportCode": "BLR",
+          "City": "BANGALORE",
+          "Country": "India",
+          "AirportDesc": "Bangalore International Airport",
+          "Type": "C",
+          "Sort": 1
+        },
+        {
+          "AirportCode": "HYD",
+          "City": "HYDERABAD",
+          "Country": "India",
+          "AirportDesc": "Rajiv Gandhi Airport",
+          "Type": "C",
+          "Sort": 2
+        }
+      ],
+      "FlightUId": "ET-0",
+      "AirlineRemark": "",
+      "Selected": true,
+      "Index": 0
+    },
+    "DomesticReturn": {
+      "FareDetails": {
+        "ChargeableFares": {
+          "ActualBaseFare": 4952,
+          "Tax": 1346,
+          "STax": 0,
+          "SCharge": 0,
+          "TDiscount": 0,
+          "TPartnerCommission": 0,
+          "NetFare": 4952,
+          "Conveniencefee": 0,
+          "ConveniencefeeType": 1,
+          "PartnerFareDatails": {
+            "NetFares": 4952,
+            "Commission": 0,
+            "CommissionType": 0
+          }
+        },
+        "NonchargeableFares": {
+          "TCharge": 0,
+          "TMarkup": 0,
+          "TSdiscount": 0
+        },
+        "FareBreakUp": {
+          "FareAry": [
+            {
+              "IntPassengerType": 1,
+              "IntBaseFare": 1851,
+              "IntTax": 473,
+              "IntYqTax": 200,
+              "IntTaxDataArray": [
+                {
+                  "IntCountry": "India",
+                  "IntAmount": 2524
+                }
+              ]
+            },
+            {
+              "IntPassengerType": 2,
+              "IntBaseFare": 1851,
+              "IntTax": 473,
+              "IntYqTax": 200,
+              "IntTaxDataArray": [
+                {
+                  "IntCountry": "India",
+                  "IntAmount": 2524
+                }
+              ]
+            },
+            {
+              "IntPassengerType": 3,
+              "IntBaseFare": 1250,
+              "IntTax": 0,
+              "IntYqTax": 0,
+              "IntTaxDataArray": [
+                {
+                  "IntCountry": "India",
+                  "IntAmount": 1250
+                }
+              ]
+            }
+          ]
+        },
+        "OcTax": 0,
+        "Bonus": 0,
+        "TotalFare": 6298,
+        "ResponseStatus": 0,
+        "Status": 14,
+        "Message": null
+      },
+      "FlightSegments": [
+        {
+          "AirEquipType": "320",
+          "ArrivalAirportCode": "HYD",
+          "ArrivalDateTime": "2020-01-04T00:25:00",
+          "ArrivalDateTimeZone": "01/04/2020 12:25:00 AM",
+          "DepartureAirportCode": "BLR",
+          "DepartureDateTime": "2020-01-03T23:00:00",
+          "DepartureDateTimeZone": "01/03/2020 11:00:00 PM",
+          "Duration": "01:25 hrs",
+          "DurationMinutes": 85,
+          "FlightNumber": "824",
+          "OperatingAirlineCode": "6E",
+          "OperatingAirlineFlightNumber": "824",
+          "Rph": "",
+          "StopQuantity": 0,
+          "AirLineName": "Indigo",
+          "AirportTax": null,
+          "ImageFileName": "6E",
+          "AirlineLogo": "https://webapi.etravos.com/Images/airline_logos/6E.png",
+          "ViaFlight": "",
+          "Discount": 0,
+          "AirportTaxChild": 0,
+          "AirportTaxInfant": 0,
+          "AdultTaxBreakup": 0,
+          "ChildTaxBreakup": 0,
+          "InfantTaxBreakup": 0,
+          "OcTax": 0,
+          "BookingClass": {
+            "Availability": "9",
+            "ResBookDesigCode": "L",
+            "IntBic": ""
+          },
+          "BookingClassFare": {
+            "AdultFare": "",
+            "Bookingclass": "",
+            "ClassType": "L",
+            "Farebasiscode": "L0IP",
+            "Rule": "Refundable",
+            "AdultCommission": null,
+            "ChildCommission": null,
+            "CommissionOnTCharge": null,
+            "ChildFare": null,
+            "InfantFare": null
+          },
+          "IntNumStops": null,
+          "IntOperatingAirlineName": null,
+          "IntArrivalAirportName": "Hyderabad",
+          "IntDepartureAirportName": "Bangalore",
+          "IntMarketingAirlineCode": "824",
+          "IntLinkSellAgrmnt": null,
+          "IntConx": null,
+          "IntAirpChg": null,
+          "IntInsideAvailOption": null,
+          "IntGenTrafRestriction": null,
+          "IntDaysOperates": null,
+          "IntJourneyTime": null,
+          "IntEndDate": null,
+          "IntStartTerminal": "1",
+          "IntEndTerminal": "",
+          "IntFltTm": null,
+          "IntLsaInd": null,
+          "IntMile": 0,
+          "Cabin": null,
+          "ItineraryNumber": "637084879167989146-217-1480_ETR1",
+          "BaggageAllowed": {
+            "CheckInBaggage": "15 KG",
+            "HandBaggage": "7 KG"
+          },
+          "AccumulatedDuration": "0",
+          "GroundTime": "00:00 hrs"
+        }
+      ],
+      "OriginDestinationoptionId": {
+        "Id": "",
+        "Key": "49708da0-d821-46e0-a7f4-ccea4ee3831d~IB11~636892211974468103182"
+      },
+      "RequestDetails": {
+        "Mode": "DOMESTIC",
+        "Source": "HYD",
+        "Destination": "BLR",
+        "Adults": 1,
+        "Children": 1,
+        "Infants": 1,
+        "DepartDate": "2020-01-01T00:00:00",
+        "ReturnDate": "2020-01-03T00:00:00",
+        "MultiCityearch": null
+      },
+      "Provider": "OpvFxVwo03md+gnyIb8Q+A==",
+      "IntOnward": null,
+      "IntReturn": null,
+      "IntMulti": null,
+      "AffiliateId": null,
+      "PartnerID": null,
+      "IsLCC": true,
+      "IsGSTMandatory": false,
+      "IsHoldAllowed": false,
+      "ID": "2bf1cad9-cdd0-4f1a-bb8b-4ec3ccc30ca8",
+      "Airports": [
+        {
+          "AirportCode": "HYD",
+          "City": "HYDERABAD",
+          "Country": "India",
+          "AirportDesc": "Rajiv Gandhi Airport",
+          "Type": "C",
+          "Sort": 2
+        },
+        {
+          "AirportCode": "BLR",
+          "City": "BANGALORE",
+          "Country": "India",
+          "AirportDesc": "Bangalore International Airport",
+          "Type": "C",
+          "Sort": 1
+        }
+      ],
+      "FlightUId": "ETR-1",
+      "AirlineRemark": "",
+      "Index": 1,
+      "Selected": true
+    }
+  },
+  "key": ""
+}</code></pre>
+                                </div>
+                            </div>
+                        </div>
+
+                        
+
+                        <hr>
+                    </div>
+                    
+                    
+                    <div class="request">
+
+                        <h4 id="request-flight-requests-flights-ticket-block-raw">
+                            Flights - Ticket Block - Raw
+                            <a href="#request-flight-requests-flights-ticket-block-raw"><i class="glyphicon glyphicon-link"></i></a>
+                        </h4>
+
+                        <div></div>
+
+                        <div>
+                            <ul class="nav nav-tabs" role="tablist">
+                                <li role="presentation" class="active"><a href="#request-flight-requests-flights-ticket-block-raw-example-curl" data-toggle="tab">Curl</a></li>
+                                <li role="presentation"><a href="#request-flight-requests-flights-ticket-block-raw-example-http" data-toggle="tab">HTTP</a></li>
+                            </ul>
+                            <div class="tab-content">
+                                <div class="tab-pane active" id="request-flight-requests-flights-ticket-block-raw-example-curl">
+                                    <pre><code class="hljs curl">curl -X POST -H "Content-Type: application/json" -d '{
+  "ActualBaseFare": 1472,
+  "ActualBaseFareRet": 1571,
+  "AdultPax": 1,
+  "BookedFrom": "",
+  "BookingDate": "21-11-2019",
+  "ChildPax": 0,
+  "FlightType": 1,
+  "Conveniencefee": 0,
+  "ConveniencefeeRet": 0,
+  "Destination": "BLR",
+  "DestinationName": "BANGALORE, India - (BLR)-Bangalore International Airport",
+  "FareDetails": null,
+  "FlightId": "",
+  "FlightIdRet": "",
+  "InfantPax": 0,
+  "IsLCC": true,
+  "IsLCCRet": true,
+  "IsNonStopFlight": true,
+  "JourneyDate": "01-01-2020",
+  "Key": "8ae21e85-d278-4ac5-a3e4-15ca999d6b84~OB1~636892210201496145182",
+  "keyRet": "8ae21e85-d278-4ac5-a3e4-15ca999d6b84~IB1~636892210201496145182",
+  "OcTax": 0,
+  "OnwardFlightSegments": [
+    {
+      "AirEquipType": "320",
+      "ArrivalAirportCode": "BLR",
+      "ArrivalDateTime": "2020-01-01T09:50:00",
+      "ArrivalDateTimeZone": "01/01/2020 9:50:00 AM",
+      "DepartureAirportCode": "HYD",
+      "DepartureDateTime": "2020-01-01T08:25:00",
+      "DepartureDateTimeZone": "01/01/2020 8:25:00 AM",
+      "Duration": "01:25 hrs",
+      "DurationMinutes": 85,
+      "FlightNumber": "151",
+      "OperatingAirlineCode": "6E",
+      "OperatingAirlineFlightNumber": "151",
+      "Rph": "",
+      "StopQuantity": 0,
+      "AirLineName": "Indigo",
+      "AirportTax": null,
+      "ImageFileName": "6E",
+      "AirlineLogo": "https://webapi.etravos.com/Images/airline_logos/6E.png",
+      "ViaFlight": "",
+      "Discount": 0,
+      "AirportTaxChild": 0,
+      "AirportTaxInfant": 0,
+      "AdultTaxBreakup": 0,
+      "ChildTaxBreakup": 0,
+      "InfantTaxBreakup": 0,
+      "OcTax": 0,
+      "BookingClass": {
+        "Availability": "9",
+        "ResBookDesigCode": "L",
+        "IntBic": ""
+      },
+      "BookingClassFare": {
+        "AdultFare": "",
+        "Bookingclass": "",
+        "ClassType": "L",
+        "Farebasiscode": "L0IP",
+        "Rule": "Refundable",
+        "AdultCommission": null,
+        "ChildCommission": null,
+        "CommissionOnTCharge": null,
+        "ChildFare": null,
+        "InfantFare": null
+      },
+      "IntNumStops": null,
+      "IntOperatingAirlineName": null,
+      "IntArrivalAirportName": "Bangalore",
+      "IntDepartureAirportName": "Hyderabad",
+      "IntMarketingAirlineCode": "151",
+      "IntLinkSellAgrmnt": null,
+      "IntConx": null,
+      "IntAirpChg": null,
+      "IntInsideAvailOption": null,
+      "IntGenTrafRestriction": null,
+      "IntDaysOperates": null,
+      "IntJourneyTime": null,
+      "IntEndDate": null,
+      "IntStartTerminal": "",
+      "IntEndTerminal": "1",
+      "IntFltTm": null,
+      "IntLsaInd": null,
+      "IntMile": 0,
+      "Cabin": null,
+      "ItineraryNumber": "637099534901902711-217-1480_ET0",
+      "BaggageAllowed": {
+        "CheckInBaggage": "15 KG",
+        "HandBaggage": "7 KG"
+      },
+      "AccumulatedDuration": "0",
+      "GroundTime": "00:00 hrs",
+      "AirportFrom": "Rajiv Gandhi Airport",
+      "AirportTo": "Bangalore International Airport",
+      "CityFrom": "HYDERABAD",
+      "CityTo": "BANGALORE"
+    }
+  ],
+  "provider": "OpvFxVwo03md+gnyIb8Q+A==",
+  "ReturnDate": "03-01-2020",
+  "ReturnFlightSegments": [
+    {
+      "AirEquipType": "320",
+      "ArrivalAirportCode": "HYD",
+      "ArrivalDateTime": "2020-01-03T20:00:00",
+      "ArrivalDateTimeZone": "01/03/2020 8:00:00 PM",
+      "DepartureAirportCode": "BLR",
+      "DepartureDateTime": "2020-01-03T18:45:00",
+      "DepartureDateTimeZone": "01/03/2020 6:45:00 PM",
+      "Duration": "01:15 hrs",
+      "DurationMinutes": 75,
+      "FlightNumber": "855",
+      "OperatingAirlineCode": "6E",
+      "OperatingAirlineFlightNumber": "855",
+      "Rph": "",
+      "StopQuantity": 0,
+      "AirLineName": "Indigo",
+      "AirportTax": null,
+      "ImageFileName": "6E",
+      "AirlineLogo": "https://webapi.etravos.com/Images/airline_logos/6E.png",
+      "ViaFlight": "",
+      "Discount": 0,
+      "AirportTaxChild": 0,
+      "AirportTaxInfant": 0,
+      "AdultTaxBreakup": 0,
+      "ChildTaxBreakup": 0,
+      "InfantTaxBreakup": 0,
+      "OcTax": 0,
+      "BookingClass": {
+        "Availability": "9",
+        "ResBookDesigCode": "L",
+        "IntBic": ""
+      },
+      "BookingClassFare": {
+        "AdultFare": "",
+        "Bookingclass": "",
+        "ClassType": "L",
+        "Farebasiscode": "L0IP",
+        "Rule": "Refundable",
+        "AdultCommission": null,
+        "ChildCommission": null,
+        "CommissionOnTCharge": null,
+        "ChildFare": null,
+        "InfantFare": null
+      },
+      "IntNumStops": null,
+      "IntOperatingAirlineName": null,
+      "IntArrivalAirportName": "Hyderabad",
+      "IntDepartureAirportName": "Bangalore",
+      "IntMarketingAirlineCode": "855",
+      "IntLinkSellAgrmnt": null,
+      "IntConx": null,
+      "IntAirpChg": null,
+      "IntInsideAvailOption": null,
+      "IntGenTrafRestriction": null,
+      "IntDaysOperates": null,
+      "IntJourneyTime": null,
+      "IntEndDate": null,
+      "IntStartTerminal": "1",
+      "IntEndTerminal": "",
+      "IntFltTm": null,
+      "IntLsaInd": null,
+      "IntMile": 0,
+      "Cabin": null,
+      "ItineraryNumber": "637099534901902711-217-1480_ETR0",
+      "BaggageAllowed": {
+        "CheckInBaggage": "15 KG",
+        "HandBaggage": "7 KG"
+      },
+      "AccumulatedDuration": "0",
+      "GroundTime": "00:00 hrs",
+      "AirportFrom": "Bangalore International Airport",
+      "AirportTo": "Rajiv Gandhi Airport",
+      "CityFrom": "BANGALORE",
+      "CityTo": "HYDERABAD"
+    }
+  ],
+  "TripType": 2,
+  "Rule": "",
+  "RuleRet": "",
+  "SCharge": 0,
+  "SChargeRet": 0,
+  "Source": "HYD",
+  "SourceName": "HYDERABAD, India - (HYD)-Rajiv Gandhi Airport",
+  "Tax": 1131,
+  "TaxRet": 659,
+  "TCharge": 0,
+  "TChargeRet": 0,
+  "TDiscount": 0,
+  "TDiscountRet": 0,
+  "TMarkup": 0,
+  "TMarkupRet": 0,
+  "TPartnerCommission": 0,
+  "TPartnerCommissionRet": 0,
+  "TravelClass": "E",
+  "TSdiscount": 0,
+  "TSdiscountRet": 0,
+  "User": "",
+  "UserType": 5,
+  "GSTDetails": null,
+  "Ages": "32",
+  "City": "HYDERABAD",
+  "dob": "09-05-1988",
+  "EmailId": "sonuame@aol.com",
+  "Genders": "M",
+  "MobileNo": "8861056670",
+  "Names": "Mr.|Sunil|Kumar|adt",
+  "PassportDetails": "",
+  "PostalCode": "560038",
+  "Psgrtype": "",
+  "Address": "S08, SAR Lohitaksh Elite",
+  "TicketResponse": null,
+  "BlockTicketRequest": null
+}' "{{eTravos}}/Flights/BlockFlightTicket"</code></pre>
+                                </div>
+                                <div class="tab-pane" id="request-flight-requests-flights-ticket-block-raw-example-http">
+                                    <pre><code class="hljs http">POST %7B%7BeTravos%7D%7D/Flights/BlockFlightTicket HTTP/1.1
+Host: 
+Content-Type: application/json
+
+{
+  "ActualBaseFare": 1472,
+  "ActualBaseFareRet": 1571,
+  "AdultPax": 1,
+  "BookedFrom": "",
+  "BookingDate": "21-11-2019",
+  "ChildPax": 0,
+  "FlightType": 1,
+  "Conveniencefee": 0,
+  "ConveniencefeeRet": 0,
+  "Destination": "BLR",
+  "DestinationName": "BANGALORE, India - (BLR)-Bangalore International Airport",
+  "FareDetails": null,
+  "FlightId": "",
+  "FlightIdRet": "",
+  "InfantPax": 0,
+  "IsLCC": true,
+  "IsLCCRet": true,
+  "IsNonStopFlight": true,
+  "JourneyDate": "01-01-2020",
+  "Key": "8ae21e85-d278-4ac5-a3e4-15ca999d6b84~OB1~636892210201496145182",
+  "keyRet": "8ae21e85-d278-4ac5-a3e4-15ca999d6b84~IB1~636892210201496145182",
+  "OcTax": 0,
+  "OnwardFlightSegments": [
+    {
+      "AirEquipType": "320",
+      "ArrivalAirportCode": "BLR",
+      "ArrivalDateTime": "2020-01-01T09:50:00",
+      "ArrivalDateTimeZone": "01/01/2020 9:50:00 AM",
+      "DepartureAirportCode": "HYD",
+      "DepartureDateTime": "2020-01-01T08:25:00",
+      "DepartureDateTimeZone": "01/01/2020 8:25:00 AM",
+      "Duration": "01:25 hrs",
+      "DurationMinutes": 85,
+      "FlightNumber": "151",
+      "OperatingAirlineCode": "6E",
+      "OperatingAirlineFlightNumber": "151",
+      "Rph": "",
+      "StopQuantity": 0,
+      "AirLineName": "Indigo",
+      "AirportTax": null,
+      "ImageFileName": "6E",
+      "AirlineLogo": "https://webapi.etravos.com/Images/airline_logos/6E.png",
+      "ViaFlight": "",
+      "Discount": 0,
+      "AirportTaxChild": 0,
+      "AirportTaxInfant": 0,
+      "AdultTaxBreakup": 0,
+      "ChildTaxBreakup": 0,
+      "InfantTaxBreakup": 0,
+      "OcTax": 0,
+      "BookingClass": {
+        "Availability": "9",
+        "ResBookDesigCode": "L",
+        "IntBic": ""
+      },
+      "BookingClassFare": {
+        "AdultFare": "",
+        "Bookingclass": "",
+        "ClassType": "L",
+        "Farebasiscode": "L0IP",
+        "Rule": "Refundable",
+        "AdultCommission": null,
+        "ChildCommission": null,
+        "CommissionOnTCharge": null,
+        "ChildFare": null,
+        "InfantFare": null
+      },
+      "IntNumStops": null,
+      "IntOperatingAirlineName": null,
+      "IntArrivalAirportName": "Bangalore",
+      "IntDepartureAirportName": "Hyderabad",
+      "IntMarketingAirlineCode": "151",
+      "IntLinkSellAgrmnt": null,
+      "IntConx": null,
+      "IntAirpChg": null,
+      "IntInsideAvailOption": null,
+      "IntGenTrafRestriction": null,
+      "IntDaysOperates": null,
+      "IntJourneyTime": null,
+      "IntEndDate": null,
+      "IntStartTerminal": "",
+      "IntEndTerminal": "1",
+      "IntFltTm": null,
+      "IntLsaInd": null,
+      "IntMile": 0,
+      "Cabin": null,
+      "ItineraryNumber": "637099534901902711-217-1480_ET0",
+      "BaggageAllowed": {
+        "CheckInBaggage": "15 KG",
+        "HandBaggage": "7 KG"
+      },
+      "AccumulatedDuration": "0",
+      "GroundTime": "00:00 hrs",
+      "AirportFrom": "Rajiv Gandhi Airport",
+      "AirportTo": "Bangalore International Airport",
+      "CityFrom": "HYDERABAD",
+      "CityTo": "BANGALORE"
+    }
+  ],
+  "provider": "OpvFxVwo03md+gnyIb8Q+A==",
+  "ReturnDate": "03-01-2020",
+  "ReturnFlightSegments": [
+    {
+      "AirEquipType": "320",
+      "ArrivalAirportCode": "HYD",
+      "ArrivalDateTime": "2020-01-03T20:00:00",
+      "ArrivalDateTimeZone": "01/03/2020 8:00:00 PM",
+      "DepartureAirportCode": "BLR",
+      "DepartureDateTime": "2020-01-03T18:45:00",
+      "DepartureDateTimeZone": "01/03/2020 6:45:00 PM",
+      "Duration": "01:15 hrs",
+      "DurationMinutes": 75,
+      "FlightNumber": "855",
+      "OperatingAirlineCode": "6E",
+      "OperatingAirlineFlightNumber": "855",
+      "Rph": "",
+      "StopQuantity": 0,
+      "AirLineName": "Indigo",
+      "AirportTax": null,
+      "ImageFileName": "6E",
+      "AirlineLogo": "https://webapi.etravos.com/Images/airline_logos/6E.png",
+      "ViaFlight": "",
+      "Discount": 0,
+      "AirportTaxChild": 0,
+      "AirportTaxInfant": 0,
+      "AdultTaxBreakup": 0,
+      "ChildTaxBreakup": 0,
+      "InfantTaxBreakup": 0,
+      "OcTax": 0,
+      "BookingClass": {
+        "Availability": "9",
+        "ResBookDesigCode": "L",
+        "IntBic": ""
+      },
+      "BookingClassFare": {
+        "AdultFare": "",
+        "Bookingclass": "",
+        "ClassType": "L",
+        "Farebasiscode": "L0IP",
+        "Rule": "Refundable",
+        "AdultCommission": null,
+        "ChildCommission": null,
+        "CommissionOnTCharge": null,
+        "ChildFare": null,
+        "InfantFare": null
+      },
+      "IntNumStops": null,
+      "IntOperatingAirlineName": null,
+      "IntArrivalAirportName": "Hyderabad",
+      "IntDepartureAirportName": "Bangalore",
+      "IntMarketingAirlineCode": "855",
+      "IntLinkSellAgrmnt": null,
+      "IntConx": null,
+      "IntAirpChg": null,
+      "IntInsideAvailOption": null,
+      "IntGenTrafRestriction": null,
+      "IntDaysOperates": null,
+      "IntJourneyTime": null,
+      "IntEndDate": null,
+      "IntStartTerminal": "1",
+      "IntEndTerminal": "",
+      "IntFltTm": null,
+      "IntLsaInd": null,
+      "IntMile": 0,
+      "Cabin": null,
+      "ItineraryNumber": "637099534901902711-217-1480_ETR0",
+      "BaggageAllowed": {
+        "CheckInBaggage": "15 KG",
+        "HandBaggage": "7 KG"
+      },
+      "AccumulatedDuration": "0",
+      "GroundTime": "00:00 hrs",
+      "AirportFrom": "Bangalore International Airport",
+      "AirportTo": "Rajiv Gandhi Airport",
+      "CityFrom": "BANGALORE",
+      "CityTo": "HYDERABAD"
+    }
+  ],
+  "TripType": 2,
+  "Rule": "",
+  "RuleRet": "",
+  "SCharge": 0,
+  "SChargeRet": 0,
+  "Source": "HYD",
+  "SourceName": "HYDERABAD, India - (HYD)-Rajiv Gandhi Airport",
+  "Tax": 1131,
+  "TaxRet": 659,
+  "TCharge": 0,
+  "TChargeRet": 0,
+  "TDiscount": 0,
+  "TDiscountRet": 0,
+  "TMarkup": 0,
+  "TMarkupRet": 0,
+  "TPartnerCommission": 0,
+  "TPartnerCommissionRet": 0,
+  "TravelClass": "E",
+  "TSdiscount": 0,
+  "TSdiscountRet": 0,
+  "User": "",
+  "UserType": 5,
+  "GSTDetails": null,
+  "Ages": "32",
+  "City": "HYDERABAD",
+  "dob": "09-05-1988",
+  "EmailId": "sonuame@aol.com",
+  "Genders": "M",
+  "MobileNo": "8861056670",
+  "Names": "Mr.|Sunil|Kumar|adt",
+  "PassportDetails": "",
+  "PostalCode": "560038",
+  "Psgrtype": "",
+  "Address": "S08, SAR Lohitaksh Elite",
+  "TicketResponse": null,
+  "BlockTicketRequest": null
+}</code></pre>
+                                </div>
+                            </div>
+                        </div>
+
+                        
+
+                        <hr>
+                    </div>
+                    
+                    
+                    <div class="request">
+
+                        <h4 id="request-flight-requests-confirm-ticket">
+                            Confirm Ticket
+                            <a href="#request-flight-requests-confirm-ticket"><i class="glyphicon glyphicon-link"></i></a>
+                        </h4>
+
+                        <div></div>
+
+                        <div>
+                            <ul class="nav nav-tabs" role="tablist">
+                                <li role="presentation" class="active"><a href="#request-flight-requests-confirm-ticket-example-curl" data-toggle="tab">Curl</a></li>
+                                <li role="presentation"><a href="#request-flight-requests-confirm-ticket-example-http" data-toggle="tab">HTTP</a></li>
+                            </ul>
+                            <div class="tab-content">
+                                <div class="tab-pane active" id="request-flight-requests-confirm-ticket-example-curl">
+                                    <pre><code class="hljs curl">curl -X PUT -H "Content-Type: application/json" "https://dev.tripsaathi.com/api/v1/flights/ticket/confirm/300513013577"</code></pre>
+                                </div>
+                                <div class="tab-pane" id="request-flight-requests-confirm-ticket-example-http">
+                                    <pre><code class="hljs http">PUT %7B%7Blocalhost%7D%7D/flights/ticket/confirm/300513013577 HTTP/1.1
+Host: 
+Content-Type: application/json</code></pre>
+                                </div>
+                            </div>
+                        </div>
+
+                        
+
+                        <hr>
+                    </div>
+                    
+                    
+                    <div class="request">
+
+                        <h4 id="request-flight-requests-add-pax">
+                            Add Pax
+                            <a href="#request-flight-requests-add-pax"><i class="glyphicon glyphicon-link"></i></a>
+                        </h4>
+
+                        <div></div>
+
+                        <div>
+                            <ul class="nav nav-tabs" role="tablist">
+                                <li role="presentation" class="active"><a href="#request-flight-requests-add-pax-example-curl" data-toggle="tab">Curl</a></li>
+                                <li role="presentation"><a href="#request-flight-requests-add-pax-example-http" data-toggle="tab">HTTP</a></li>
+                            </ul>
+                            <div class="tab-content">
+                                <div class="tab-pane active" id="request-flight-requests-add-pax-example-curl">
+                                    <pre><code class="hljs curl">curl -X POST -H "Content-Type: application/json" -d '{
+	"userid" : "B6A5885A-05B8-4609-A459-E05F57DEF70C",
+	"paxes" : [
+  		{ "Salut" : "Mr", "FirstName" : "Sunil", "LastName" : "Kumar", "Type" : "ADT", "dob":"03-02-1988", "gender" : "M" },
+  		{ "Salut" : "Mr", "FirstName" : "Vicky", "LastName" : "Kumar", "Type" : "ADT", "dob":"03-02-1988", "gender" : "M" },
+  		{ "Salut" : "Mrs", "FirstName" : "Rashmi", "LastName" : "Singh", "Type" : "ADT", "dob":"03-02-1988", "gender" : "F" },
+  		{ "Salut" : "Mrs", "FirstName" : "Rajni", "LastName" : "singh", "Type" : "ADT", "dob":"03-02-1988", "gender" : "F" }
+  	]
+}' "https://dev.tripsaathi.com/api/v1/flights/ticket/add-pax"</code></pre>
+                                </div>
+                                <div class="tab-pane" id="request-flight-requests-add-pax-example-http">
+                                    <pre><code class="hljs http">POST %7B%7Blocalhost%7D%7D/flights/ticket/add-pax HTTP/1.1
+Host: 
+Content-Type: application/json
+
+{
+	"userid" : "B6A5885A-05B8-4609-A459-E05F57DEF70C",
+	"paxes" : [
+  		{ "Salut" : "Mr", "FirstName" : "Sunil", "LastName" : "Kumar", "Type" : "ADT", "dob":"03-02-1988", "gender" : "M" },
+  		{ "Salut" : "Mr", "FirstName" : "Vicky", "LastName" : "Kumar", "Type" : "ADT", "dob":"03-02-1988", "gender" : "M" },
+  		{ "Salut" : "Mrs", "FirstName" : "Rashmi", "LastName" : "Singh", "Type" : "ADT", "dob":"03-02-1988", "gender" : "F" },
+  		{ "Salut" : "Mrs", "FirstName" : "Rajni", "LastName" : "singh", "Type" : "ADT", "dob":"03-02-1988", "gender" : "F" }
+  	]
+}</code></pre>
+                                </div>
+                            </div>
+                        </div>
+
+                        
+
+                        <hr>
+                    </div>
+                    
+                    
+                    <div class="request">
+
+                        <h4 id="request-flight-requests-get-pax">
+                            Get Pax
+                            <a href="#request-flight-requests-get-pax"><i class="glyphicon glyphicon-link"></i></a>
+                        </h4>
+
+                        <div></div>
+
+                        <div>
+                            <ul class="nav nav-tabs" role="tablist">
+                                <li role="presentation" class="active"><a href="#request-flight-requests-get-pax-example-curl" data-toggle="tab">Curl</a></li>
+                                <li role="presentation"><a href="#request-flight-requests-get-pax-example-http" data-toggle="tab">HTTP</a></li>
+                            </ul>
+                            <div class="tab-content">
+                                <div class="tab-pane active" id="request-flight-requests-get-pax-example-curl">
+                                    <pre><code class="hljs curl">curl -X GET -H "Content-Type: application/json" "{{dev-ts}}/flights/ticket/pax/6d2df81e-759e-4c97-8eb9-67e4d1b27a96"</code></pre>
+                                </div>
+                                <div class="tab-pane" id="request-flight-requests-get-pax-example-http">
+                                    <pre><code class="hljs http">GET %7B%7Bdev-ts%7D%7D/flights/ticket/pax/6d2df81e-759e-4c97-8eb9-67e4d1b27a96 HTTP/1.1
+Host: 
+Content-Type: application/json</code></pre>
+                                </div>
+                            </div>
+                        </div>
+
+                        
+
+                        <hr>
+                    </div>
+                    
+                    
+                    <div class="request">
+
+                        <h4 id="request-flight-requests-get-ticket-by-ref-no">
+                            Get Ticket by Ref No
+                            <a href="#request-flight-requests-get-ticket-by-ref-no"><i class="glyphicon glyphicon-link"></i></a>
+                        </h4>
+
+                        <div></div>
+
+                        <div>
+                            <ul class="nav nav-tabs" role="tablist">
+                                <li role="presentation" class="active"><a href="#request-flight-requests-get-ticket-by-ref-no-example-curl" data-toggle="tab">Curl</a></li>
+                                <li role="presentation"><a href="#request-flight-requests-get-ticket-by-ref-no-example-http" data-toggle="tab">HTTP</a></li>
+                            </ul>
+                            <div class="tab-content">
+                                <div class="tab-pane active" id="request-flight-requests-get-ticket-by-ref-no-example-curl">
+                                    <pre><code class="hljs curl">curl -X GET -H "Content-Type: application/json" "https://dev.tripsaathi.com/api/v1/flights/ticket/get/300825016577"</code></pre>
+                                </div>
+                                <div class="tab-pane" id="request-flight-requests-get-ticket-by-ref-no-example-http">
+                                    <pre><code class="hljs http">GET %7B%7Bdev%7D%7D/flights/ticket/get/300825016577 HTTP/1.1
+Host: 
+Content-Type: application/json</code></pre>
+                                </div>
+                            </div>
+                        </div>
+
+                        
+
+                        <hr>
+                    </div>
+                    
+                    
+                    <div class="request">
+
+                        <h4 id="request-flight-requests-get-booking-status">
+                            Get Booking Status
+                            <a href="#request-flight-requests-get-booking-status"><i class="glyphicon glyphicon-link"></i></a>
+                        </h4>
+
+                        <div></div>
+
+                        <div>
+                            <ul class="nav nav-tabs" role="tablist">
+                                <li role="presentation" class="active"><a href="#request-flight-requests-get-booking-status-example-curl" data-toggle="tab">Curl</a></li>
+                                <li role="presentation"><a href="#request-flight-requests-get-booking-status-example-http" data-toggle="tab">HTTP</a></li>
+                            </ul>
+                            <div class="tab-content">
+                                <div class="tab-pane active" id="request-flight-requests-get-booking-status-example-curl">
+                                    <pre><code class="hljs curl">curl -X GET -H "Content-Type: application/json" "https://dev.tripsaathi.com/api/v1/flights/booking/300825016577?email=sonuame@aol.com&phone=8861056670"</code></pre>
+                                </div>
+                                <div class="tab-pane" id="request-flight-requests-get-booking-status-example-http">
+                                    <pre><code class="hljs http">GET %7B%7Blocalhost%7D%7D/flights/booking/300825016577?email=sonuame@aol.com&phone=8861056670 HTTP/1.1
+Host: 
+Content-Type: application/json</code></pre>
+                                </div>
+                            </div>
+                        </div>
+
+                        
+
+                        <hr>
+                    </div>
+                    
+                    
+                    <div class="request">
+
+                        <h4 id="request-flight-requests-get-ticket-status">
+                            Get Ticket Status
+                            <a href="#request-flight-requests-get-ticket-status"><i class="glyphicon glyphicon-link"></i></a>
+                        </h4>
+
+                        <div></div>
+
+                        <div>
+                            <ul class="nav nav-tabs" role="tablist">
+                                <li role="presentation" class="active"><a href="#request-flight-requests-get-ticket-status-example-curl" data-toggle="tab">Curl</a></li>
+                                <li role="presentation"><a href="#request-flight-requests-get-ticket-status-example-http" data-toggle="tab">HTTP</a></li>
+                            </ul>
+                            <div class="tab-content">
+                                <div class="tab-pane active" id="request-flight-requests-get-ticket-status-example-curl">
+                                    <pre><code class="hljs curl">curl -X GET -H "Content-Type: application/json" "https://dev.tripsaathi.com/api/v1/flights/ticket/getorig/300825016577"</code></pre>
+                                </div>
+                                <div class="tab-pane" id="request-flight-requests-get-ticket-status-example-http">
+                                    <pre><code class="hljs http">GET %7B%7Blocalhost%7D%7D/flights/ticket/getorig/300825016577 HTTP/1.1
+Host: 
+Content-Type: application/json</code></pre>
+                                </div>
+                            </div>
+                        </div>
+
+                        
+
+                        <hr>
+                    </div>
+                    
+                    
+                    <div class="request">
+
+                        <h4 id="request-flight-requests-get-ticket-confirm-response">
+                            Get Ticket Confirm Response
+                            <a href="#request-flight-requests-get-ticket-confirm-response"><i class="glyphicon glyphicon-link"></i></a>
+                        </h4>
+
+                        <div></div>
+
+                        <div>
+                            <ul class="nav nav-tabs" role="tablist">
+                                <li role="presentation" class="active"><a href="#request-flight-requests-get-ticket-confirm-response-example-curl" data-toggle="tab">Curl</a></li>
+                                <li role="presentation"><a href="#request-flight-requests-get-ticket-confirm-response-example-http" data-toggle="tab">HTTP</a></li>
+                            </ul>
+                            <div class="tab-content">
+                                <div class="tab-pane active" id="request-flight-requests-get-ticket-confirm-response-example-curl">
+                                    <pre><code class="hljs curl">curl -X GET -H "Content-Type: application/json" "https://dev.tripsaathi.com/api/v1/flights/ticket/repair/confirm-response/3002316278"</code></pre>
+                                </div>
+                                <div class="tab-pane" id="request-flight-requests-get-ticket-confirm-response-example-http">
+                                    <pre><code class="hljs http">GET %7B%7Blocalhost%7D%7D/flights/ticket/repair/confirm-response/3002316278 HTTP/1.1
+Host: 
+Content-Type: application/json</code></pre>
+                                </div>
+                            </div>
+                        </div>
+
+                        
+
+                        <hr>
+                    </div>
+                    
+                    
+                    <div class="request">
+
+                        <h4 id="request-flight-requests-repair-ticket-response">
+                            Repair Ticket Response
+                            <a href="#request-flight-requests-repair-ticket-response"><i class="glyphicon glyphicon-link"></i></a>
+                        </h4>
+
+                        <div></div>
+
+                        <div>
+                            <ul class="nav nav-tabs" role="tablist">
+                                <li role="presentation" class="active"><a href="#request-flight-requests-repair-ticket-response-example-curl" data-toggle="tab">Curl</a></li>
+                                <li role="presentation"><a href="#request-flight-requests-repair-ticket-response-example-http" data-toggle="tab">HTTP</a></li>
+                            </ul>
+                            <div class="tab-content">
+                                <div class="tab-pane active" id="request-flight-requests-repair-ticket-response-example-curl">
+                                    <pre><code class="hljs curl">curl -X POST -H "Content-Type: application/json" -d '{
+    "ReferenceNo": "3002316278",
+    "APIReferenceNo": "",
+    "Message": "Blocked successully",
+    "ResponseStatus": 200,
+    "RefundResponse": null,
+    "BookingStatus": 8,
+    "GDFPNRNo": "O2N1YG",
+    "EticketNo": null,
+    "Flightuid": null,
+    "Passworduid": null,
+    "TransactionId": null,
+    "PNRs": []
+}' "https://dev.tripsaathi.com/api/v1/flights/ticket/repair/repair-response/3002316278"</code></pre>
+                                </div>
+                                <div class="tab-pane" id="request-flight-requests-repair-ticket-response-example-http">
+                                    <pre><code class="hljs http">POST %7B%7Blocalhost%7D%7D/flights/ticket/repair/repair-response/3002316278 HTTP/1.1
+Host: 
+Content-Type: application/json
+
+{
+    "ReferenceNo": "3002316278",
+    "APIReferenceNo": "",
+    "Message": "Blocked successully",
+    "ResponseStatus": 200,
+    "RefundResponse": null,
+    "BookingStatus": 8,
+    "GDFPNRNo": "O2N1YG",
+    "EticketNo": null,
+    "Flightuid": null,
+    "Passworduid": null,
+    "TransactionId": null,
+    "PNRs": []
+}</code></pre>
+                                </div>
+                            </div>
+                        </div>
+
+                        
+
+                        <hr>
+                    </div>
+                    
+
+                </div>
+                <div class="endpoints-group">
+                    <h3 id="folder-identity">
+                        Identity
+                        <a href="#folder-identity"><i class="glyphicon glyphicon-link"></i></a>
+                    </h3>
+
+                    <div></div>
+
+                    
+                    
+                    <div class="request">
+
+                        <h4 id="request-identity-usercontext">
+                            userContext
+                            <a href="#request-identity-usercontext"><i class="glyphicon glyphicon-link"></i></a>
+                        </h4>
+
+                        <div></div>
+
+                        <div>
+                            <ul class="nav nav-tabs" role="tablist">
+                                <li role="presentation" class="active"><a href="#request-identity-usercontext-example-curl" data-toggle="tab">Curl</a></li>
+                                <li role="presentation"><a href="#request-identity-usercontext-example-http" data-toggle="tab">HTTP</a></li>
+                            </ul>
+                            <div class="tab-content">
+                                <div class="tab-pane active" id="request-identity-usercontext-example-curl">
+                                    <pre><code class="hljs curl">curl -X GET -H "Content-Type: application/json" -H "Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1bmlxdWVfbmFtZSI6Im1lcmNoYW50QHNzLmNvbSIsImh0dHA6Ly9zY2hlbWFzLm1pY3Jvc29mdC5jb20vd3MvMjAwOC8wNi9pZGVudGl0eS9jbGFpbXMvdXNlcmRhdGEiOiJ7XCJVc2VyTmFtZVwiOlwibWVyY2hhbnRAc3MuY29tXCIsXCJOYW1lXCI6XCJDb3Jwb3JhdGUgIEFjY291bnRcIixcIlVzZXJJZFwiOlwiZTdiYWE2OTEtMDhlNy00M2IyLWFlNjUtZGZhMjgwZjE0ZmZhXCIsXCJJc0F1dGhlbnRpY2F0ZWRcIjp0cnVlLFwiRmlyc3ROYW1lXCI6XCJDb3Jwb3JhdGUgXCIsXCJMYXN0TmFtZVwiOlwiQWNjb3VudFwiLFwiUGhvbmVOb1wiOlwiODg2MTA1NjY3MVwiLFwiRW1haWxcIjpcIm1lcmNoYW50QHNzLmNvbVwiLFwiR2VuZGVyXCI6XCJNYWxlXCIsXCJET0JcIjpcIjIwMTktMTEtMjVUMDA6MDA6MDBcIixcIlR5cGVcIjo1LFwiVHdvRmFjdG9yXCI6ZmFsc2UsXCJDb3VudHJ5XCI6XCJJbmRpYVwiLFwiTGFzdExvZ2luXCI6XCIwMDAxLTAxLTAxVDAwOjAwOjAwXCIsXCJBY3RpdmVcIjp0cnVlLFwiT1RQVmVyaWZpZWRcIjpmYWxzZSxcIkVtYWlsVmVyaWZpZWRcIjpmYWxzZSxcIkZCVXNlcklEXCI6bnVsbCxcIkdVc2VySURcIjpudWxsLFwiV2FsbGV0XCI6MTMzNC4wMCxcIlRva2VuRXhwaXJlZFwiOmZhbHNlfSIsIm5iZiI6MTU3NzI2MzIwNiwiZXhwIjoxNTc3MjYzMjE2LCJpYXQiOjE1NzcyNjMyMDYsImlzcyI6Imh0dHA6Ly9sb2NhbGhvc3Q6MjAwMCJ9.J7s1oM8EQBeGKgt9UdK-Z46qm3H0PcfDeYRCdmpGZdg" "https://dev.tripsaathi.com/api/v1/accounts/getUserContext"</code></pre>
+                                </div>
+                                <div class="tab-pane" id="request-identity-usercontext-example-http">
+                                    <pre><code class="hljs http">GET %7B%7Blocalhost%7D%7D/accounts/getUserContext HTTP/1.1
+Host: 
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1bmlxdWVfbmFtZSI6Im1lcmNoYW50QHNzLmNvbSIsImh0dHA6Ly9zY2hlbWFzLm1pY3Jvc29mdC5jb20vd3MvMjAwOC8wNi9pZGVudGl0eS9jbGFpbXMvdXNlcmRhdGEiOiJ7XCJVc2VyTmFtZVwiOlwibWVyY2hhbnRAc3MuY29tXCIsXCJOYW1lXCI6XCJDb3Jwb3JhdGUgIEFjY291bnRcIixcIlVzZXJJZFwiOlwiZTdiYWE2OTEtMDhlNy00M2IyLWFlNjUtZGZhMjgwZjE0ZmZhXCIsXCJJc0F1dGhlbnRpY2F0ZWRcIjp0cnVlLFwiRmlyc3ROYW1lXCI6XCJDb3Jwb3JhdGUgXCIsXCJMYXN0TmFtZVwiOlwiQWNjb3VudFwiLFwiUGhvbmVOb1wiOlwiODg2MTA1NjY3MVwiLFwiRW1haWxcIjpcIm1lcmNoYW50QHNzLmNvbVwiLFwiR2VuZGVyXCI6XCJNYWxlXCIsXCJET0JcIjpcIjIwMTktMTEtMjVUMDA6MDA6MDBcIixcIlR5cGVcIjo1LFwiVHdvRmFjdG9yXCI6ZmFsc2UsXCJDb3VudHJ5XCI6XCJJbmRpYVwiLFwiTGFzdExvZ2luXCI6XCIwMDAxLTAxLTAxVDAwOjAwOjAwXCIsXCJBY3RpdmVcIjp0cnVlLFwiT1RQVmVyaWZpZWRcIjpmYWxzZSxcIkVtYWlsVmVyaWZpZWRcIjpmYWxzZSxcIkZCVXNlcklEXCI6bnVsbCxcIkdVc2VySURcIjpudWxsLFwiV2FsbGV0XCI6MTMzNC4wMCxcIlRva2VuRXhwaXJlZFwiOmZhbHNlfSIsIm5iZiI6MTU3NzI2MzIwNiwiZXhwIjoxNTc3MjYzMjE2LCJpYXQiOjE1NzcyNjMyMDYsImlzcyI6Imh0dHA6Ly9sb2NhbGhvc3Q6MjAwMCJ9.J7s1oM8EQBeGKgt9UdK-Z46qm3H0PcfDeYRCdmpGZdg</code></pre>
+                                </div>
+                            </div>
+                        </div>
+
+                        
+
+                        <hr>
+                    </div>
+                    
+                    
+                    <div class="request">
+
+                        <h4 id="request-identity-register">
+                            Register
+                            <a href="#request-identity-register"><i class="glyphicon glyphicon-link"></i></a>
+                        </h4>
+
+                        <div></div>
+
+                        <div>
+                            <ul class="nav nav-tabs" role="tablist">
+                                <li role="presentation" class="active"><a href="#request-identity-register-example-curl" data-toggle="tab">Curl</a></li>
+                                <li role="presentation"><a href="#request-identity-register-example-http" data-toggle="tab">HTTP</a></li>
+                            </ul>
+                            <div class="tab-content">
+                                <div class="tab-pane active" id="request-identity-register-example-curl">
+                                    <pre><code class="hljs curl">curl -X POST -H "Content-Type: application/json" -d '{
+	"Email" : "corporate@tripsaathi.com",
+	"Password" : "Avenue@1122",
+	"ConfirmPassword" : "Avenue@1122",
+	"PhoneNo" : "8861056672",
+	"RegType" : "Normal",
+	"UserType": "ThirdParty",
+	"FirstName" : "Corporate",
+	"LastName" : "Account",
+	"createLogin": true,
+	"UserName" : "corporate@tripsaathi.com"
+}
+' "https://dev.tripsaathi.com/api/v1/accounts/register"</code></pre>
+                                </div>
+                                <div class="tab-pane" id="request-identity-register-example-http">
+                                    <pre><code class="hljs http">POST %7B%7Bdev%7D%7D/accounts/register HTTP/1.1
+Host: 
+Content-Type: application/json
+
+{
+	"Email" : "corporate@tripsaathi.com",
+	"Password" : "Avenue@1122",
+	"ConfirmPassword" : "Avenue@1122",
+	"PhoneNo" : "8861056672",
+	"RegType" : "Normal",
+	"UserType": "ThirdParty",
+	"FirstName" : "Corporate",
+	"LastName" : "Account",
+	"createLogin": true,
+	"UserName" : "corporate@tripsaathi.com"
+}
+</code></pre>
+                                </div>
+                            </div>
+                        </div>
+
+                        
+
+                        <hr>
+                    </div>
+                    
+                    
+                    <div class="request">
+
+                        <h4 id="request-identity-recharge-wallet">
+                            Recharge Wallet
+                            <a href="#request-identity-recharge-wallet"><i class="glyphicon glyphicon-link"></i></a>
+                        </h4>
+
+                        <div></div>
+
+                        <div>
+                            <ul class="nav nav-tabs" role="tablist">
+                                <li role="presentation" class="active"><a href="#request-identity-recharge-wallet-example-curl" data-toggle="tab">Curl</a></li>
+                                <li role="presentation"><a href="#request-identity-recharge-wallet-example-http" data-toggle="tab">HTTP</a></li>
+                            </ul>
+                            <div class="tab-content">
+                                <div class="tab-pane active" id="request-identity-recharge-wallet-example-curl">
+                                    <pre><code class="hljs curl">curl -X POST -H "Content-Type: application/json" -d '{
+	"phone" : "9606793093",
+	"amount" : 100,
+	"TicketNo" : null,
+	"remarks" : "Recharge"
+}
+' "https://dev.tripsaathi.com/api/v1/accounts/wallet-recharge"</code></pre>
+                                </div>
+                                <div class="tab-pane" id="request-identity-recharge-wallet-example-http">
+                                    <pre><code class="hljs http">POST %7B%7Blive%7D%7D/accounts/wallet-recharge HTTP/1.1
+Host: 
+Content-Type: application/json
+
+{
+	"phone" : "9606793093",
+	"amount" : 100,
+	"TicketNo" : null,
+	"remarks" : "Recharge"
+}
+</code></pre>
+                                </div>
+                            </div>
+                        </div>
+
+                        
+
+                        <hr>
+                    </div>
+                    
+                    
+                    <div class="request">
+
+                        <h4 id="request-identity-wallet-transactions">
+                            Wallet Transactions
+                            <a href="#request-identity-wallet-transactions"><i class="glyphicon glyphicon-link"></i></a>
+                        </h4>
+
+                        <div></div>
+
+                        <div>
+                            <ul class="nav nav-tabs" role="tablist">
+                                <li role="presentation" class="active"><a href="#request-identity-wallet-transactions-example-curl" data-toggle="tab">Curl</a></li>
+                                <li role="presentation"><a href="#request-identity-wallet-transactions-example-http" data-toggle="tab">HTTP</a></li>
+                            </ul>
+                            <div class="tab-content">
+                                <div class="tab-pane active" id="request-identity-wallet-transactions-example-curl">
+                                    <pre><code class="hljs curl">curl -X GET -H "Content-Type: application/json" "https://dev.tripsaathi.com/api/v1/accounts/wallet-transactions/a15dd774-ced8-44b0-9afe-e959f1c2833d"</code></pre>
+                                </div>
+                                <div class="tab-pane" id="request-identity-wallet-transactions-example-http">
+                                    <pre><code class="hljs http">GET %7B%7Blocalhost%7D%7D/accounts/wallet-transactions/a15dd774-ced8-44b0-9afe-e959f1c2833d HTTP/1.1
+Host: 
+Content-Type: application/json</code></pre>
+                                </div>
+                            </div>
+                        </div>
+
+                        
+
+                        <hr>
+                    </div>
+                    
+                    
+                    <div class="request">
+
+                        <h4 id="request-identity-wallet-balance">
+                            Wallet Balance
+                            <a href="#request-identity-wallet-balance"><i class="glyphicon glyphicon-link"></i></a>
+                        </h4>
+
+                        <div></div>
+
+                        <div>
+                            <ul class="nav nav-tabs" role="tablist">
+                                <li role="presentation" class="active"><a href="#request-identity-wallet-balance-example-curl" data-toggle="tab">Curl</a></li>
+                                <li role="presentation"><a href="#request-identity-wallet-balance-example-http" data-toggle="tab">HTTP</a></li>
+                            </ul>
+                            <div class="tab-content">
+                                <div class="tab-pane active" id="request-identity-wallet-balance-example-curl">
+                                    <pre><code class="hljs curl">curl -X GET -H "Content-Type: application/json" -H "Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1bmlxdWVfbmFtZSI6Im1lcmNoYW50QHNzLmNvbSIsImh0dHA6Ly9zY2hlbWFzLm1pY3Jvc29mdC5jb20vd3MvMjAwOC8wNi9pZGVudGl0eS9jbGFpbXMvdXNlcmRhdGEiOiJ7XCJVc2VyTmFtZVwiOlwibWVyY2hhbnRAc3MuY29tXCIsXCJOYW1lXCI6XCJDb3Jwb3JhdGUgIEFjY291bnRcIixcIlVzZXJJZFwiOlwiZTdiYWE2OTEtMDhlNy00M2IyLWFlNjUtZGZhMjgwZjE0ZmZhXCIsXCJJc0F1dGhlbnRpY2F0ZWRcIjpmYWxzZSxcIkZpcnN0TmFtZVwiOlwiQ29ycG9yYXRlIFwiLFwiTGFzdE5hbWVcIjpcIkFjY291bnRcIixcIlBob25lTm9cIjpcIjg4NjEwNTY2NzFcIixcIkVtYWlsXCI6XCJtZXJjaGFudEBzcy5jb21cIixcIkdlbmRlclwiOlwiTWFsZVwiLFwiRE9CXCI6XCIyMDE5LTExLTI1VDAwOjAwOjAwXCIsXCJUeXBlXCI6NSxcIlR3b0ZhY3RvclwiOmZhbHNlLFwiQ291bnRyeVwiOlwiSW5kaWFcIixcIkxhc3RMb2dpblwiOlwiMDAwMS0wMS0wMVQwMDowMDowMFwiLFwiQWN0aXZlXCI6dHJ1ZSxcIk9UUFZlcmlmaWVkXCI6ZmFsc2UsXCJFbWFpbFZlcmlmaWVkXCI6ZmFsc2UsXCJGQlVzZXJJRFwiOm51bGwsXCJHVXNlcklEXCI6bnVsbCxcIldhbGxldFwiOjEzMzQuMDB9IiwibmJmIjoxNTc0NzY2MzIwLCJleHAiOjE1NzQ3NjgxMjAsImlhdCI6MTU3NDc2NjMyMCwiaXNzIjoiaHR0cDovL2xvY2FsaG9zdDoyMDAwIn0.HhYORs5wf9SQzAIbHuonlGMxUWJxOR8NqoqoyKtDaOI" "https://dev.tripsaathi.com/api/v1/accounts/wallet-balance"</code></pre>
+                                </div>
+                                <div class="tab-pane" id="request-identity-wallet-balance-example-http">
+                                    <pre><code class="hljs http">GET %7B%7Blocalhost%7D%7D/accounts/wallet-balance HTTP/1.1
+Host: 
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1bmlxdWVfbmFtZSI6Im1lcmNoYW50QHNzLmNvbSIsImh0dHA6Ly9zY2hlbWFzLm1pY3Jvc29mdC5jb20vd3MvMjAwOC8wNi9pZGVudGl0eS9jbGFpbXMvdXNlcmRhdGEiOiJ7XCJVc2VyTmFtZVwiOlwibWVyY2hhbnRAc3MuY29tXCIsXCJOYW1lXCI6XCJDb3Jwb3JhdGUgIEFjY291bnRcIixcIlVzZXJJZFwiOlwiZTdiYWE2OTEtMDhlNy00M2IyLWFlNjUtZGZhMjgwZjE0ZmZhXCIsXCJJc0F1dGhlbnRpY2F0ZWRcIjpmYWxzZSxcIkZpcnN0TmFtZVwiOlwiQ29ycG9yYXRlIFwiLFwiTGFzdE5hbWVcIjpcIkFjY291bnRcIixcIlBob25lTm9cIjpcIjg4NjEwNTY2NzFcIixcIkVtYWlsXCI6XCJtZXJjaGFudEBzcy5jb21cIixcIkdlbmRlclwiOlwiTWFsZVwiLFwiRE9CXCI6XCIyMDE5LTExLTI1VDAwOjAwOjAwXCIsXCJUeXBlXCI6NSxcIlR3b0ZhY3RvclwiOmZhbHNlLFwiQ291bnRyeVwiOlwiSW5kaWFcIixcIkxhc3RMb2dpblwiOlwiMDAwMS0wMS0wMVQwMDowMDowMFwiLFwiQWN0aXZlXCI6dHJ1ZSxcIk9UUFZlcmlmaWVkXCI6ZmFsc2UsXCJFbWFpbFZlcmlmaWVkXCI6ZmFsc2UsXCJGQlVzZXJJRFwiOm51bGwsXCJHVXNlcklEXCI6bnVsbCxcIldhbGxldFwiOjEzMzQuMDB9IiwibmJmIjoxNTc0NzY2MzIwLCJleHAiOjE1NzQ3NjgxMjAsImlhdCI6MTU3NDc2NjMyMCwiaXNzIjoiaHR0cDovL2xvY2FsaG9zdDoyMDAwIn0.HhYORs5wf9SQzAIbHuonlGMxUWJxOR8NqoqoyKtDaOI</code></pre>
+                                </div>
+                            </div>
+                        </div>
+
+                        
+
+                        <hr>
+                    </div>
+                    
+                    
+                    <div class="request">
+
+                        <h4 id="request-identity-delete-user">
+                            Delete User
+                            <a href="#request-identity-delete-user"><i class="glyphicon glyphicon-link"></i></a>
+                        </h4>
+
+                        <div></div>
+
+                        <div>
+                            <ul class="nav nav-tabs" role="tablist">
+                                <li role="presentation" class="active"><a href="#request-identity-delete-user-example-curl" data-toggle="tab">Curl</a></li>
+                                <li role="presentation"><a href="#request-identity-delete-user-example-http" data-toggle="tab">HTTP</a></li>
+                            </ul>
+                            <div class="tab-content">
+                                <div class="tab-pane active" id="request-identity-delete-user-example-curl">
+                                    <pre><code class="hljs curl">curl -X DELETE -H "Content-Type: application/json" "https://dev.tripsaathi.com/api/v1/accounts/delete/60639876-6cc5-4db8-8853-c46d0bd6b453"</code></pre>
+                                </div>
+                                <div class="tab-pane" id="request-identity-delete-user-example-http">
+                                    <pre><code class="hljs http">DELETE %7B%7Blocalhost%7D%7D/accounts/delete/60639876-6cc5-4db8-8853-c46d0bd6b453 HTTP/1.1
+Host: 
+Content-Type: application/json</code></pre>
+                                </div>
+                            </div>
+                        </div>
+
+                        
+
+                        <hr>
+                    </div>
+                    
+                    
+                    <div class="request">
+
+                        <h4 id="request-identity-get-all-users">
+                            Get All Users
+                            <a href="#request-identity-get-all-users"><i class="glyphicon glyphicon-link"></i></a>
+                        </h4>
+
+                        <div></div>
+
+                        <div>
+                            <ul class="nav nav-tabs" role="tablist">
+                                <li role="presentation" class="active"><a href="#request-identity-get-all-users-example-curl" data-toggle="tab">Curl</a></li>
+                                <li role="presentation"><a href="#request-identity-get-all-users-example-http" data-toggle="tab">HTTP</a></li>
+                            </ul>
+                            <div class="tab-content">
+                                <div class="tab-pane active" id="request-identity-get-all-users-example-curl">
+                                    <pre><code class="hljs curl">curl -X GET -H "Content-Type: application/json" "https://dev.tripsaathi.com/api/v1/accounts/getall"</code></pre>
+                                </div>
+                                <div class="tab-pane" id="request-identity-get-all-users-example-http">
+                                    <pre><code class="hljs http">GET %7B%7Blocalhost%7D%7D/accounts/getall HTTP/1.1
+Host: 
+Content-Type: application/json</code></pre>
+                                </div>
+                            </div>
+                        </div>
+
+                        
+
+                        <hr>
+                    </div>
+                    
+                    
+                    <div class="request">
+
+                        <h4 id="request-identity-get-user">
+                            Get User
+                            <a href="#request-identity-get-user"><i class="glyphicon glyphicon-link"></i></a>
+                        </h4>
+
+                        <div></div>
+
+                        <div>
+                            <ul class="nav nav-tabs" role="tablist">
+                                <li role="presentation" class="active"><a href="#request-identity-get-user-example-curl" data-toggle="tab">Curl</a></li>
+                                <li role="presentation"><a href="#request-identity-get-user-example-http" data-toggle="tab">HTTP</a></li>
+                            </ul>
+                            <div class="tab-content">
+                                <div class="tab-pane active" id="request-identity-get-user-example-curl">
+                                    <pre><code class="hljs curl">curl -X GET -H "Content-Type: application/x-www-form-urlencoded" "https://dev.tripsaathi.com/api/v1/accounts/get?email=sonuame@aol.com&phone=8861056670&userid=6d2df81e-759e-4c97-8eb9-67e4d1b27a96"</code></pre>
+                                </div>
+                                <div class="tab-pane" id="request-identity-get-user-example-http">
+                                    <pre><code class="hljs http">GET %7B%7Blocalhost%7D%7D/accounts/get?email=sonuame@aol.com&phone=8861056670&userid=6d2df81e-759e-4c97-8eb9-67e4d1b27a96 HTTP/1.1
+Host: 
+Content-Type: application/x-www-form-urlencoded</code></pre>
+                                </div>
+                            </div>
+                        </div>
+
+                        
+
+                        <hr>
+                    </div>
+                    
+                    
+                    <div class="request">
+
+                        <h4 id="request-identity-get-user-by-uid">
+                            Get User by UID
+                            <a href="#request-identity-get-user-by-uid"><i class="glyphicon glyphicon-link"></i></a>
+                        </h4>
+
+                        <div></div>
+
+                        <div>
+                            <ul class="nav nav-tabs" role="tablist">
+                                <li role="presentation" class="active"><a href="#request-identity-get-user-by-uid-example-curl" data-toggle="tab">Curl</a></li>
+                                <li role="presentation"><a href="#request-identity-get-user-by-uid-example-http" data-toggle="tab">HTTP</a></li>
+                            </ul>
+                            <div class="tab-content">
+                                <div class="tab-pane active" id="request-identity-get-user-by-uid-example-curl">
+                                    <pre><code class="hljs curl">curl -X GET -H "Content-Type: application/json" -H "apikey: {{apikey}}" "https://dev.tripsaathi.com/api/v1/accounts/user?uid=e7baa691-08e7-43b2-ae65-dfa280f14ffa"</code></pre>
+                                </div>
+                                <div class="tab-pane" id="request-identity-get-user-by-uid-example-http">
+                                    <pre><code class="hljs http">GET %7B%7Blocalhost%7D%7D/accounts/user?uid=e7baa691-08e7-43b2-ae65-dfa280f14ffa HTTP/1.1
+Host: 
+Content-Type: application/json
+apikey: {{apikey}}</code></pre>
+                                </div>
+                            </div>
+                        </div>
+
+                        
+
+                        <hr>
+                    </div>
+                    
+                    
+                    <div class="request">
+
+                        <h4 id="request-identity-get-user-exists">
+                            Get User Exists
+                            <a href="#request-identity-get-user-exists"><i class="glyphicon glyphicon-link"></i></a>
+                        </h4>
+
+                        <div></div>
+
+                        <div>
+                            <ul class="nav nav-tabs" role="tablist">
+                                <li role="presentation" class="active"><a href="#request-identity-get-user-exists-example-curl" data-toggle="tab">Curl</a></li>
+                                <li role="presentation"><a href="#request-identity-get-user-exists-example-http" data-toggle="tab">HTTP</a></li>
+                            </ul>
+                            <div class="tab-content">
+                                <div class="tab-pane active" id="request-identity-get-user-exists-example-curl">
+                                    <pre><code class="hljs curl">curl -X GET -H "Content-Type: application/x-www-form-urlencoded" "https://dev.tripsaathi.com/api/v1/accounts/user/exists?email=sonuame@aol.com&phone=8861056670&userid=6d2df81e-759e-4c97-8eb9-67e4d1b27a96"</code></pre>
+                                </div>
+                                <div class="tab-pane" id="request-identity-get-user-exists-example-http">
+                                    <pre><code class="hljs http">GET %7B%7Blocalhost%7D%7D/accounts/user/exists?email=sonuame@aol.com&phone=8861056670&userid=6d2df81e-759e-4c97-8eb9-67e4d1b27a96 HTTP/1.1
+Host: 
+Content-Type: application/x-www-form-urlencoded</code></pre>
+                                </div>
+                            </div>
+                        </div>
+
+                        
+
+                        <hr>
+                    </div>
+                    
+                    
+                    <div class="request">
+
+                        <h4 id="request-identity-token">
+                            Token
+                            <a href="#request-identity-token"><i class="glyphicon glyphicon-link"></i></a>
+                        </h4>
+
+                        <div></div>
+
+                        <div>
+                            <ul class="nav nav-tabs" role="tablist">
+                                <li role="presentation" class="active"><a href="#request-identity-token-example-curl" data-toggle="tab">Curl</a></li>
+                                <li role="presentation"><a href="#request-identity-token-example-http" data-toggle="tab">HTTP</a></li>
+                            </ul>
+                            <div class="tab-content">
+                                <div class="tab-pane active" id="request-identity-token-example-curl">
+                                    <pre><code class="hljs curl">curl -X PUT -H "Content-Type: application/json" -d '{
+	"username" : "6362657190",
+	"password": "test123",
+	"grant_type" : "login"
+}' "https://dev.tripsaathi.com/api/v1/accounts/token"</code></pre>
+                                </div>
+                                <div class="tab-pane" id="request-identity-token-example-http">
+                                    <pre><code class="hljs http">PUT %7B%7Blocalhost%7D%7D/accounts/token HTTP/1.1
+Host: 
+Content-Type: application/json
+
+{
+	"username" : "6362657190",
+	"password": "test123",
+	"grant_type" : "login"
+}</code></pre>
+                                </div>
+                            </div>
+                        </div>
+
+                        
+
+                        <hr>
+                    </div>
+                    
+                    
+                    <div class="request">
+
+                        <h4 id="request-identity-token-refresh">
+                            Token Refresh
+                            <a href="#request-identity-token-refresh"><i class="glyphicon glyphicon-link"></i></a>
+                        </h4>
+
+                        <div></div>
+
+                        <div>
+                            <ul class="nav nav-tabs" role="tablist">
+                                <li role="presentation" class="active"><a href="#request-identity-token-refresh-example-curl" data-toggle="tab">Curl</a></li>
+                                <li role="presentation"><a href="#request-identity-token-refresh-example-http" data-toggle="tab">HTTP</a></li>
+                            </ul>
+                            <div class="tab-content">
+                                <div class="tab-pane active" id="request-identity-token-refresh-example-curl">
+                                    <pre><code class="hljs curl">curl -X PUT -H "Content-Type: application/json" -H "Authorization: Bearer " -d '{
+	"RefreshToken" : "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJodHRwOi8vc2NoZW1hcy5taWNyb3NvZnQuY29tL3dzLzIwMDgvMDYvaWRlbnRpdHkvY2xhaW1zL3VzZXJkYXRhIjoie1wiZ3JhbnRfdHlwZVwiOlwiTG9naW5cIixcInVzZXJuYW1lXCI6XCI4ODYxMDU2NjcwXCIsXCJFbWFpbFwiOm51bGwsXCJQYXNzd29yZFwiOlwiQXRtZWdhMzI4XCIsXCJDb25maXJtUGFzc3dvcmRcIjpudWxsLFwiRmlyc3ROYW1lXCI6bnVsbCxcIkxhc3ROYW1lXCI6bnVsbCxcIlBob25lTm9cIjpudWxsLFwiQWdlXCI6bnVsbCxcIkNyZWF0ZUxvZ2luXCI6ZmFsc2UsXCJjYWxsZXJIb3N0XCI6bnVsbCxcIlVzZXJJRFwiOlwiMDAwMDAwMDAtMDAwMC0wMDAwLTAwMDAtMDAwMDAwMDAwMDAwXCIsXCJBdXRoVG9rZW5cIjpudWxsLFwiUmVmcmVzaFRva2VuXCI6bnVsbCxcInJlZ3R5cGVcIjpcIk5vcm1hbFwiLFwidXNlcnR5cGVcIjpcIkFkbWluXCJ9IiwibmJmIjoxNTY4NjQ1NjQ5LCJleHAiOjE1Njg2NDc0NDksImlhdCI6MTU2ODY0NTY1MiwiaXNzIjoiaHR0cDovL2xvY2FsaG9zdDoyMDAwIn0.nS79WJBIMzDKt_TeW9syUBGHVWjjYLWe3iGWvhdZOyQ",
+	"grant_type" : "RefreshToken"
+}' "https://dev.tripsaathi.com/api/v1/accounts/token"</code></pre>
+                                </div>
+                                <div class="tab-pane" id="request-identity-token-refresh-example-http">
+                                    <pre><code class="hljs http">PUT %7B%7Blocalhost%7D%7D/accounts/token HTTP/1.1
+Host: 
+Content-Type: application/json
+Authorization: Bearer 
+
+{
+	"RefreshToken" : "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJodHRwOi8vc2NoZW1hcy5taWNyb3NvZnQuY29tL3dzLzIwMDgvMDYvaWRlbnRpdHkvY2xhaW1zL3VzZXJkYXRhIjoie1wiZ3JhbnRfdHlwZVwiOlwiTG9naW5cIixcInVzZXJuYW1lXCI6XCI4ODYxMDU2NjcwXCIsXCJFbWFpbFwiOm51bGwsXCJQYXNzd29yZFwiOlwiQXRtZWdhMzI4XCIsXCJDb25maXJtUGFzc3dvcmRcIjpudWxsLFwiRmlyc3ROYW1lXCI6bnVsbCxcIkxhc3ROYW1lXCI6bnVsbCxcIlBob25lTm9cIjpudWxsLFwiQWdlXCI6bnVsbCxcIkNyZWF0ZUxvZ2luXCI6ZmFsc2UsXCJjYWxsZXJIb3N0XCI6bnVsbCxcIlVzZXJJRFwiOlwiMDAwMDAwMDAtMDAwMC0wMDAwLTAwMDAtMDAwMDAwMDAwMDAwXCIsXCJBdXRoVG9rZW5cIjpudWxsLFwiUmVmcmVzaFRva2VuXCI6bnVsbCxcInJlZ3R5cGVcIjpcIk5vcm1hbFwiLFwidXNlcnR5cGVcIjpcIkFkbWluXCJ9IiwibmJmIjoxNTY4NjQ1NjQ5LCJleHAiOjE1Njg2NDc0NDksImlhdCI6MTU2ODY0NTY1MiwiaXNzIjoiaHR0cDovL2xvY2FsaG9zdDoyMDAwIn0.nS79WJBIMzDKt_TeW9syUBGHVWjjYLWe3iGWvhdZOyQ",
+	"grant_type" : "RefreshToken"
+}</code></pre>
+                                </div>
+                            </div>
+                        </div>
+
+                        
+
+                        <hr>
+                    </div>
+                    
+                    
+                    <div class="request">
+
+                        <h4 id="request-identity-get-otp">
+                            Get OTP
+                            <a href="#request-identity-get-otp"><i class="glyphicon glyphicon-link"></i></a>
+                        </h4>
+
+                        <div></div>
+
+                        <div>
+                            <ul class="nav nav-tabs" role="tablist">
+                                <li role="presentation" class="active"><a href="#request-identity-get-otp-example-curl" data-toggle="tab">Curl</a></li>
+                                <li role="presentation"><a href="#request-identity-get-otp-example-http" data-toggle="tab">HTTP</a></li>
+                            </ul>
+                            <div class="tab-content">
+                                <div class="tab-pane active" id="request-identity-get-otp-example-curl">
+                                    <pre><code class="hljs curl">curl -X GET -H "Content-Type: application/json" -H "Authorization: Bearer " "{{dev-ts}}/accounts/otp?phone=8861056670"</code></pre>
+                                </div>
+                                <div class="tab-pane" id="request-identity-get-otp-example-http">
+                                    <pre><code class="hljs http">GET %7B%7Bdev-ts%7D%7D/accounts/otp?phone=8861056670 HTTP/1.1
+Host: 
+Content-Type: application/json
+Authorization: Bearer </code></pre>
+                                </div>
+                            </div>
+                        </div>
+
+                        
+
+                        <hr>
+                    </div>
+                    
+                    
+                    <div class="request">
+
+                        <h4 id="request-identity-verify-otp">
+                            Verify OTP
+                            <a href="#request-identity-verify-otp"><i class="glyphicon glyphicon-link"></i></a>
+                        </h4>
+
+                        <div></div>
+
+                        <div>
+                            <ul class="nav nav-tabs" role="tablist">
+                                <li role="presentation" class="active"><a href="#request-identity-verify-otp-example-curl" data-toggle="tab">Curl</a></li>
+                                <li role="presentation"><a href="#request-identity-verify-otp-example-http" data-toggle="tab">HTTP</a></li>
+                            </ul>
+                            <div class="tab-content">
+                                <div class="tab-pane active" id="request-identity-verify-otp-example-curl">
+                                    <pre><code class="hljs curl">curl -X PUT -H "Content-Type: application/json" -H "Authorization: Bearer " -d '{
+	"RefreshToken" : "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJodHRwOi8vc2NoZW1hcy5taWNyb3NvZnQuY29tL3dzLzIwMDgvMDYvaWRlbnRpdHkvY2xhaW1zL3VzZXJkYXRhIjoie1wiZ3JhbnRfdHlwZVwiOlwiTG9naW5cIixcInVzZXJuYW1lXCI6XCI4ODYxMDU2NjcwXCIsXCJFbWFpbFwiOm51bGwsXCJQYXNzd29yZFwiOlwiQXRtZWdhMzI4XCIsXCJDb25maXJtUGFzc3dvcmRcIjpudWxsLFwiRmlyc3ROYW1lXCI6bnVsbCxcIkxhc3ROYW1lXCI6bnVsbCxcIlBob25lTm9cIjpudWxsLFwiQWdlXCI6bnVsbCxcIkNyZWF0ZUxvZ2luXCI6ZmFsc2UsXCJjYWxsZXJIb3N0XCI6bnVsbCxcIlVzZXJJRFwiOlwiMDAwMDAwMDAtMDAwMC0wMDAwLTAwMDAtMDAwMDAwMDAwMDAwXCIsXCJyZWd0eXBlXCI6XCJOb3JtYWxcIixcInVzZXJ0eXBlXCI6XCJBZG1pblwifSIsIm5iZiI6MTU2ODQ5MjczNywiZXhwIjoxNTY4NDk0NTM3LCJpYXQiOjE1Njg0OTI3MzgsImlzcyI6Imh0dHA6Ly9sb2NhbGhvc3Q6MjAwMCJ9.pN8St6FzPEaC4iqhZIg9L23J1fWxPGx47H6XhC5V3pM",
+	"grant_type" : "RefreshToken"
+}' "{{dev-ts}}/accounts/otp?ident=0cfd5a6e-b3d3-4753-8736-811b729afe9f&otp=32630&skipuser=true"</code></pre>
+                                </div>
+                                <div class="tab-pane" id="request-identity-verify-otp-example-http">
+                                    <pre><code class="hljs http">PUT %7B%7Bdev-ts%7D%7D/accounts/otp?ident=0cfd5a6e-b3d3-4753-8736-811b729afe9f&otp=32630&skipuser=true HTTP/1.1
+Host: 
+Content-Type: application/json
+Authorization: Bearer 
+
+{
+	"RefreshToken" : "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJodHRwOi8vc2NoZW1hcy5taWNyb3NvZnQuY29tL3dzLzIwMDgvMDYvaWRlbnRpdHkvY2xhaW1zL3VzZXJkYXRhIjoie1wiZ3JhbnRfdHlwZVwiOlwiTG9naW5cIixcInVzZXJuYW1lXCI6XCI4ODYxMDU2NjcwXCIsXCJFbWFpbFwiOm51bGwsXCJQYXNzd29yZFwiOlwiQXRtZWdhMzI4XCIsXCJDb25maXJtUGFzc3dvcmRcIjpudWxsLFwiRmlyc3ROYW1lXCI6bnVsbCxcIkxhc3ROYW1lXCI6bnVsbCxcIlBob25lTm9cIjpudWxsLFwiQWdlXCI6bnVsbCxcIkNyZWF0ZUxvZ2luXCI6ZmFsc2UsXCJjYWxsZXJIb3N0XCI6bnVsbCxcIlVzZXJJRFwiOlwiMDAwMDAwMDAtMDAwMC0wMDAwLTAwMDAtMDAwMDAwMDAwMDAwXCIsXCJyZWd0eXBlXCI6XCJOb3JtYWxcIixcInVzZXJ0eXBlXCI6XCJBZG1pblwifSIsIm5iZiI6MTU2ODQ5MjczNywiZXhwIjoxNTY4NDk0NTM3LCJpYXQiOjE1Njg0OTI3MzgsImlzcyI6Imh0dHA6Ly9sb2NhbGhvc3Q6MjAwMCJ9.pN8St6FzPEaC4iqhZIg9L23J1fWxPGx47H6XhC5V3pM",
+	"grant_type" : "RefreshToken"
+}</code></pre>
+                                </div>
+                            </div>
+                        </div>
+
+                        
+
+                        <hr>
+                    </div>
+                    
+                    
+                    <div class="request">
+
+                        <h4 id="request-identity-login-with-otp">
+                            Login with OTP
+                            <a href="#request-identity-login-with-otp"><i class="glyphicon glyphicon-link"></i></a>
+                        </h4>
+
+                        <div></div>
+
+                        <div>
+                            <ul class="nav nav-tabs" role="tablist">
+                                <li role="presentation" class="active"><a href="#request-identity-login-with-otp-example-curl" data-toggle="tab">Curl</a></li>
+                                <li role="presentation"><a href="#request-identity-login-with-otp-example-http" data-toggle="tab">HTTP</a></li>
+                            </ul>
+                            <div class="tab-content">
+                                <div class="tab-pane active" id="request-identity-login-with-otp-example-curl">
+                                    <pre><code class="hljs curl">curl -X PUT -H "Content-Type: application/json" -H "Authorization: Bearer " -d '{
+	"RefreshToken" : "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJodHRwOi8vc2NoZW1hcy5taWNyb3NvZnQuY29tL3dzLzIwMDgvMDYvaWRlbnRpdHkvY2xhaW1zL3VzZXJkYXRhIjoie1wiZ3JhbnRfdHlwZVwiOlwiTG9naW5cIixcInVzZXJuYW1lXCI6XCI4ODYxMDU2NjcwXCIsXCJFbWFpbFwiOm51bGwsXCJQYXNzd29yZFwiOlwiQXRtZWdhMzI4XCIsXCJDb25maXJtUGFzc3dvcmRcIjpudWxsLFwiRmlyc3ROYW1lXCI6bnVsbCxcIkxhc3ROYW1lXCI6bnVsbCxcIlBob25lTm9cIjpudWxsLFwiQWdlXCI6bnVsbCxcIkNyZWF0ZUxvZ2luXCI6ZmFsc2UsXCJjYWxsZXJIb3N0XCI6bnVsbCxcIlVzZXJJRFwiOlwiMDAwMDAwMDAtMDAwMC0wMDAwLTAwMDAtMDAwMDAwMDAwMDAwXCIsXCJyZWd0eXBlXCI6XCJOb3JtYWxcIixcInVzZXJ0eXBlXCI6XCJBZG1pblwifSIsIm5iZiI6MTU2ODQ5MjczNywiZXhwIjoxNTY4NDk0NTM3LCJpYXQiOjE1Njg0OTI3MzgsImlzcyI6Imh0dHA6Ly9sb2NhbGhvc3Q6MjAwMCJ9.pN8St6FzPEaC4iqhZIg9L23J1fWxPGx47H6XhC5V3pM",
+	"grant_type" : "RefreshToken"
+}' "https://dev.tripsaathi.com/api/v1/accounts/otp-login?ident=7448200b-a1b7-42e2-8c06-ba57d5bf33b4&otp=38000"</code></pre>
+                                </div>
+                                <div class="tab-pane" id="request-identity-login-with-otp-example-http">
+                                    <pre><code class="hljs http">PUT %7B%7Blocalhost%7D%7D/accounts/otp-login?ident=7448200b-a1b7-42e2-8c06-ba57d5bf33b4&otp=38000 HTTP/1.1
+Host: 
+Content-Type: application/json
+Authorization: Bearer 
+
+{
+	"RefreshToken" : "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJodHRwOi8vc2NoZW1hcy5taWNyb3NvZnQuY29tL3dzLzIwMDgvMDYvaWRlbnRpdHkvY2xhaW1zL3VzZXJkYXRhIjoie1wiZ3JhbnRfdHlwZVwiOlwiTG9naW5cIixcInVzZXJuYW1lXCI6XCI4ODYxMDU2NjcwXCIsXCJFbWFpbFwiOm51bGwsXCJQYXNzd29yZFwiOlwiQXRtZWdhMzI4XCIsXCJDb25maXJtUGFzc3dvcmRcIjpudWxsLFwiRmlyc3ROYW1lXCI6bnVsbCxcIkxhc3ROYW1lXCI6bnVsbCxcIlBob25lTm9cIjpudWxsLFwiQWdlXCI6bnVsbCxcIkNyZWF0ZUxvZ2luXCI6ZmFsc2UsXCJjYWxsZXJIb3N0XCI6bnVsbCxcIlVzZXJJRFwiOlwiMDAwMDAwMDAtMDAwMC0wMDAwLTAwMDAtMDAwMDAwMDAwMDAwXCIsXCJyZWd0eXBlXCI6XCJOb3JtYWxcIixcInVzZXJ0eXBlXCI6XCJBZG1pblwifSIsIm5iZiI6MTU2ODQ5MjczNywiZXhwIjoxNTY4NDk0NTM3LCJpYXQiOjE1Njg0OTI3MzgsImlzcyI6Imh0dHA6Ly9sb2NhbGhvc3Q6MjAwMCJ9.pN8St6FzPEaC4iqhZIg9L23J1fWxPGx47H6XhC5V3pM",
+	"grant_type" : "RefreshToken"
+}</code></pre>
+                                </div>
+                            </div>
+                        </div>
+
+                        
+
+                        <hr>
+                    </div>
+                    
+                    
+                    <div class="request">
+
+                        <h4 id="request-identity-change-password">
+                            Change Password
+                            <a href="#request-identity-change-password"><i class="glyphicon glyphicon-link"></i></a>
+                        </h4>
+
+                        <div></div>
+
+                        <div>
+                            <ul class="nav nav-tabs" role="tablist">
+                                <li role="presentation" class="active"><a href="#request-identity-change-password-example-curl" data-toggle="tab">Curl</a></li>
+                                <li role="presentation"><a href="#request-identity-change-password-example-http" data-toggle="tab">HTTP</a></li>
+                            </ul>
+                            <div class="tab-content">
+                                <div class="tab-pane active" id="request-identity-change-password-example-curl">
+                                    <pre><code class="hljs curl">curl -X POST -H "Content-Type: application/json" -H "Authorization: Bearer " -d '{
+	"userid" : "",
+	"oldpassword" : "",
+	"newpassword" : ""
+}' "https://dev.tripsaathi.com/api/v1/accounts/password"</code></pre>
+                                </div>
+                                <div class="tab-pane" id="request-identity-change-password-example-http">
+                                    <pre><code class="hljs http">POST %7B%7Blocalhost%7D%7D/accounts/password HTTP/1.1
+Host: 
+Content-Type: application/json
+Authorization: Bearer 
+
+{
+	"userid" : "",
+	"oldpassword" : "",
+	"newpassword" : ""
+}</code></pre>
+                                </div>
+                            </div>
+                        </div>
+
+                        
+
+                        <hr>
+                    </div>
+                    
+                    
+                    <div class="request">
+
+                        <h4 id="request-identity-create-login">
+                            Create Login
+                            <a href="#request-identity-create-login"><i class="glyphicon glyphicon-link"></i></a>
+                        </h4>
+
+                        <div></div>
+
+                        <div>
+                            <ul class="nav nav-tabs" role="tablist">
+                                <li role="presentation" class="active"><a href="#request-identity-create-login-example-curl" data-toggle="tab">Curl</a></li>
+                                <li role="presentation"><a href="#request-identity-create-login-example-http" data-toggle="tab">HTTP</a></li>
+                            </ul>
+                            <div class="tab-content">
+                                <div class="tab-pane active" id="request-identity-create-login-example-curl">
+                                    <pre><code class="hljs curl">curl -X POST -H "Content-Type: application/json" -d '{
+	"username" : "sonuame@aol3.com",
+	"password": "Atmega328",
+	"confirmPassword" : "Atmega328",
+	"grant_type" : "register",
+	"userid" : "6D2DF81E-759E-4C97-8EB9-67E4D1B27A96"
+}' "https://dev.tripsaathi.com/api/v1/accounts/create-login"</code></pre>
+                                </div>
+                                <div class="tab-pane" id="request-identity-create-login-example-http">
+                                    <pre><code class="hljs http">POST %7B%7Blocalhost%7D%7D/accounts/create-login HTTP/1.1
+Host: 
+Content-Type: application/json
+
+{
+	"username" : "sonuame@aol3.com",
+	"password": "Atmega328",
+	"confirmPassword" : "Atmega328",
+	"grant_type" : "register",
+	"userid" : "6D2DF81E-759E-4C97-8EB9-67E4D1B27A96"
+}</code></pre>
+                                </div>
+                            </div>
+                        </div>
+
+                        
+
+                        <hr>
+                    </div>
+                    
+                    
+                    <div class="request">
+
+                        <h4 id="request-identity-fb-generate-fb-token">
+                            FB - Generate FB Token
+                            <a href="#request-identity-fb-generate-fb-token"><i class="glyphicon glyphicon-link"></i></a>
+                        </h4>
+
+                        <div></div>
+
+                        <div>
+                            <ul class="nav nav-tabs" role="tablist">
+                                <li role="presentation" class="active"><a href="#request-identity-fb-generate-fb-token-example-curl" data-toggle="tab">Curl</a></li>
+                                <li role="presentation"><a href="#request-identity-fb-generate-fb-token-example-http" data-toggle="tab">HTTP</a></li>
+                            </ul>
+                            <div class="tab-content">
+                                <div class="tab-pane active" id="request-identity-fb-generate-fb-token-example-curl">
+                                    <pre><code class="hljs curl">curl -X GET "https://graph.facebook.com/oauth/access_token?client_id=394976454514940&client_secret=c066b370821691e0c534d15ef7ad5cff&grant_type=client_credentials"</code></pre>
+                                </div>
+                                <div class="tab-pane" id="request-identity-fb-generate-fb-token-example-http">
+                                    <pre><code class="hljs http">GET /oauth/access_token?client_id=394976454514940&client_secret=c066b370821691e0c534d15ef7ad5cff&grant_type=client_credentials HTTP/1.1
+Host: graph.facebook.com</code></pre>
+                                </div>
+                            </div>
+                        </div>
+
+                        
+
+                        <hr>
+                    </div>
+                    
+                    
+                    <div class="request">
+
+                        <h4 id="request-identity-fb-validate-fb-token">
+                            FB - Validate FB Token
+                            <a href="#request-identity-fb-validate-fb-token"><i class="glyphicon glyphicon-link"></i></a>
+                        </h4>
+
+                        <div></div>
+
+                        <div>
+                            <ul class="nav nav-tabs" role="tablist">
+                                <li role="presentation" class="active"><a href="#request-identity-fb-validate-fb-token-example-curl" data-toggle="tab">Curl</a></li>
+                                <li role="presentation"><a href="#request-identity-fb-validate-fb-token-example-http" data-toggle="tab">HTTP</a></li>
+                            </ul>
+                            <div class="tab-content">
+                                <div class="tab-pane active" id="request-identity-fb-validate-fb-token-example-curl">
+                                    <pre><code class="hljs curl">curl -X GET "https://graph.facebook.com/debug_token?input_token=EAAFnOp9EGPwBABWOFNRhgJa1l24hSCyZBSgg676zB14ZAZAqUiJFfRPEQZBMJqql8SWE6t9Bv4IsSarTJl7xwe4nXJVRLAHmvs5hMVhywzLVYIOIvxDnKn9IRh1EPQahpTPLj56ZB9dev98L4RVoXai52qvBXIX7ZASwZCNwg7GuUX5irmSff2m2tZCCuXXLt3yr4A2TEEde4QLKJUeQiz79&access_token=394976454514940|c066b370821691e0c534d15ef7ad5cff"</code></pre>
+                                </div>
+                                <div class="tab-pane" id="request-identity-fb-validate-fb-token-example-http">
+                                    <pre><code class="hljs http">GET /debug_token?input_token=EAAFnOp9EGPwBABWOFNRhgJa1l24hSCyZBSgg676zB14ZAZAqUiJFfRPEQZBMJqql8SWE6t9Bv4IsSarTJl7xwe4nXJVRLAHmvs5hMVhywzLVYIOIvxDnKn9IRh1EPQahpTPLj56ZB9dev98L4RVoXai52qvBXIX7ZASwZCNwg7GuUX5irmSff2m2tZCCuXXLt3yr4A2TEEde4QLKJUeQiz79&access_token=394976454514940|c066b370821691e0c534d15ef7ad5cff HTTP/1.1
+Host: graph.facebook.com</code></pre>
+                                </div>
+                            </div>
+                        </div>
+
+                        
+
+                        <hr>
+                    </div>
+                    
+                    
+                    <div class="request">
+
+                        <h4 id="request-identity-fb-get-fb-token-details">
+                            FB - Get FB Token Details
+                            <a href="#request-identity-fb-get-fb-token-details"><i class="glyphicon glyphicon-link"></i></a>
+                        </h4>
+
+                        <div></div>
+
+                        <div>
+                            <ul class="nav nav-tabs" role="tablist">
+                                <li role="presentation" class="active"><a href="#request-identity-fb-get-fb-token-details-example-curl" data-toggle="tab">Curl</a></li>
+                                <li role="presentation"><a href="#request-identity-fb-get-fb-token-details-example-http" data-toggle="tab">HTTP</a></li>
+                            </ul>
+                            <div class="tab-content">
+                                <div class="tab-pane active" id="request-identity-fb-get-fb-token-details-example-curl">
+                                    <pre><code class="hljs curl">curl -X GET "https://graph.facebook.com/me?access_token=EAAFnOp9EGPwBAKBqupoHJT4NmhwylxWekrV2roxdpbyYUci5op6KQgDzyxd5u4WE1YT5pUSBFbZCHClKulYH4swkjSsoOCfpZC9YvPoZC0cCvEMd3BqJmaZChuZCGVkXvq0EC8fx5Qjn6myPL9B29cojuhwATutGiGjuj8MtjjHZBZBsz8VsIGBTcSUxmuZB8UjXZBjFzld90VwHqxZCgbX0ZB4zFkOTA8yttit1xYLOQZAkvP5IC9UmlFTH&fields=id,last_name,first_name,email,gender,birthday"</code></pre>
+                                </div>
+                                <div class="tab-pane" id="request-identity-fb-get-fb-token-details-example-http">
+                                    <pre><code class="hljs http">GET /me?access_token=EAAFnOp9EGPwBAKBqupoHJT4NmhwylxWekrV2roxdpbyYUci5op6KQgDzyxd5u4WE1YT5pUSBFbZCHClKulYH4swkjSsoOCfpZC9YvPoZC0cCvEMd3BqJmaZChuZCGVkXvq0EC8fx5Qjn6myPL9B29cojuhwATutGiGjuj8MtjjHZBZBsz8VsIGBTcSUxmuZB8UjXZBjFzld90VwHqxZCgbX0ZB4zFkOTA8yttit1xYLOQZAkvP5IC9UmlFTH&fields=id,last_name,first_name,email,gender,birthday HTTP/1.1
+Host: graph.facebook.com</code></pre>
+                                </div>
+                            </div>
+                        </div>
+
+                        
+
+                        <hr>
+                    </div>
+                    
+                    
+                    <div class="request">
+
+                        <h4 id="request-identity-ts-get-fb-token-details">
+                            TS - Get FB Token Details
+                            <a href="#request-identity-ts-get-fb-token-details"><i class="glyphicon glyphicon-link"></i></a>
+                        </h4>
+
+                        <div></div>
+
+                        <div>
+                            <ul class="nav nav-tabs" role="tablist">
+                                <li role="presentation" class="active"><a href="#request-identity-ts-get-fb-token-details-example-curl" data-toggle="tab">Curl</a></li>
+                                <li role="presentation"><a href="#request-identity-ts-get-fb-token-details-example-http" data-toggle="tab">HTTP</a></li>
+                            </ul>
+                            <div class="tab-content">
+                                <div class="tab-pane active" id="request-identity-ts-get-fb-token-details-example-curl">
+                                    <pre><code class="hljs curl">curl -X GET "https://dev.tripsaathi.com/api/v1/accounts/fb/user?token=EAAFnOp9EGPwBAEpw0nlGTRbS0Wqf78jX3kx94ZBpROKe0JayPR2fmsvFeRQAP0FtiV9PlNHzcTqhAXwTxoJ2BV4y2WFGa7HadcZCJIellbjpcpXMeQdwbXxShZBCiM0x0ta6hwri83ufDWsSAyvJTj3dl5pnZCboAMvEGZAq8jHe5jLnMo5z3dcmaUiX1kRESdCudErLvXVyWC49v6juK3zXlfWZBj7c9CjA6FgrTl2wk62tSmSNoo"</code></pre>
+                                </div>
+                                <div class="tab-pane" id="request-identity-ts-get-fb-token-details-example-http">
+                                    <pre><code class="hljs http">GET %7B%7Blocalhost%7D%7D/accounts/fb/user?token=EAAFnOp9EGPwBAEpw0nlGTRbS0Wqf78jX3kx94ZBpROKe0JayPR2fmsvFeRQAP0FtiV9PlNHzcTqhAXwTxoJ2BV4y2WFGa7HadcZCJIellbjpcpXMeQdwbXxShZBCiM0x0ta6hwri83ufDWsSAyvJTj3dl5pnZCboAMvEGZAq8jHe5jLnMo5z3dcmaUiX1kRESdCudErLvXVyWC49v6juK3zXlfWZBj7c9CjA6FgrTl2wk62tSmSNoo HTTP/1.1
+Host: </code></pre>
+                                </div>
+                            </div>
+                        </div>
+
+                        
+
+                        <hr>
+                    </div>
+                    
+                    
+                    <div class="request">
+
+                        <h4 id="request-identity-ts-get-fb-token-validation">
+                            TS - Get FB Token Validation
+                            <a href="#request-identity-ts-get-fb-token-validation"><i class="glyphicon glyphicon-link"></i></a>
+                        </h4>
+
+                        <div></div>
+
+                        <div>
+                            <ul class="nav nav-tabs" role="tablist">
+                                <li role="presentation" class="active"><a href="#request-identity-ts-get-fb-token-validation-example-curl" data-toggle="tab">Curl</a></li>
+                                <li role="presentation"><a href="#request-identity-ts-get-fb-token-validation-example-http" data-toggle="tab">HTTP</a></li>
+                            </ul>
+                            <div class="tab-content">
+                                <div class="tab-pane active" id="request-identity-ts-get-fb-token-validation-example-curl">
+                                    <pre><code class="hljs curl">curl -X GET "https://dev.tripsaathi.com/api/v1/accounts/fb/validation?token=EAAFnOp9EGPwBADCHvKgMIqjZAYZBByL7W8qze8SacOU88zJUX0kPsn4ZAINovYzyZAWZCUzg8vZCZCgyM37LVr2zeTTfpDw7hw6yg5UEVrVKZB182Pl4bstkxT9QaW0pJMwx68opCjNbH3dJtgTd5oLhwJBGNJ9zzS38Wg1AZCWkyDEc7ZBstjuqeYowr1iKH0niVUvU14CVZASsKFDmK04S9ZAP9KVOTcLEhc4OH41OyIxXl0ExG8ZBhVjvNQiHAexCVx24ZD&userid=2638498279528365"</code></pre>
+                                </div>
+                                <div class="tab-pane" id="request-identity-ts-get-fb-token-validation-example-http">
+                                    <pre><code class="hljs http">GET %7B%7Blocalhost%7D%7D/accounts/fb/validation?token=EAAFnOp9EGPwBADCHvKgMIqjZAYZBByL7W8qze8SacOU88zJUX0kPsn4ZAINovYzyZAWZCUzg8vZCZCgyM37LVr2zeTTfpDw7hw6yg5UEVrVKZB182Pl4bstkxT9QaW0pJMwx68opCjNbH3dJtgTd5oLhwJBGNJ9zzS38Wg1AZCWkyDEc7ZBstjuqeYowr1iKH0niVUvU14CVZASsKFDmK04S9ZAP9KVOTcLEhc4OH41OyIxXl0ExG8ZBhVjvNQiHAexCVx24ZD&userid=2638498279528365 HTTP/1.1
+Host: </code></pre>
+                                </div>
+                            </div>
+                        </div>
+
+                        
+
+                        <hr>
+                    </div>
+                    
+
+                </div>
+                
+                
+               
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="https://code.jquery.com/jquery-2.2.2.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+<script>
+    $(document).ready(function() {
+        $("table:not(.table)").addClass('table table-bordered');
+    });
+</script>
+</body>
+</html>
